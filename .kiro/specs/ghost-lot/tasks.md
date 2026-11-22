@@ -70,7 +70,9 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 
 - [ ] 5. Vision service
   - [ ] 5.1 Implement the pass-1 and pass-2 prompts as versioned files, the parser (strip `<think>` blocks and fences, validate with zod) and the retry-then-`unread` rule. _Req 3.1, 3.2, 3.5_
+  - [ ] 5.0 Choose the vision provider. Get a Gemini key from Nidhi and read the Flash-Lite RPD in her AI Studio. Run `eval/pipeline_eval.py` with Gemini's `MODEL_BASE_URL`/`MODEL_ID`, and finish the Groq run once its daily tokens recover. Pick the provider with the better score within the free quota. The eval scripts are now provider-agnostic. _Req 7a.6_
   - [ ] 5.2 Implement the worker queue with 429 backoff, the tile fetch with 3 retries, and the cache keyed by tile, model and prompt version. _Req 3.6, 7.2_
+  - [ ] 5.2a Add the daily read budget and the per-IP live-lookup cap in KV. Handle a daily-quota 429 by marking the day as spent. Return `paused` from `/api/read` while the overlay keeps working. _Req 7a.2–7a.5_
   - [ ] 5.3 Implement `/api/read` as an SSE stream of per-tile progress. _Req 7.2_
   - [ ] 5.4 Add a Kiro hook: saving any file in `src/server/prompts/*` runs `make eval`, which fails if recall drops below 0.80 or there is any false positive on hazard-free crops. _Req 3_
   - [ ] 5.5 Grow the eval set to about 40 crops by adding one bigger city, such as a 1920s downtown with a rail yard. Nidhi hand-checks 5 of the agent's labels. _Req 3_

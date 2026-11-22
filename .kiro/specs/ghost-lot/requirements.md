@@ -106,6 +106,21 @@ Hackathon target: Kiroween 2026, Frankenstein category (Library of Congress scan
 2. WHEN a live lookup exceeds the model provider's rate limit THEN the system SHALL queue the tiles, show progress per tile, and keep already-read pins on screen.
 3. The system SHALL work in current Chrome, Safari and Firefox on desktop, and on a phone-width (375 px) screen.
 
+## Requirement 7a: Free-tier budget (added 2026-11-22)
+
+**User story:** As the owner, I want the app to run on free model quotas without breaking, so that a burst of visitors cannot take the demo down or run up a bill.
+
+Context: Groq's free tier allows 200,000 tokens per day, about 80 tile reads. One live lookup needs about 10–20 pass-1 reads plus a few pass-2 reads.
+
+### Acceptance criteria
+
+1. The landing page SHALL lead with the precomputed showcase addresses. Live lookup is the second path.
+2. The system SHALL keep a shared daily counter of model calls. Live reading SHALL stop once the counter reaches `READ_BUDGET_PER_DAY`, a server-side setting. The counter SHALL reset at the provider's daily reset.
+3. The system SHALL allow each client IP at most `LIVE_LOOKUPS_PER_IP_PER_DAY` live lookups that call the model (default 2). Cached tiles never count against either limit.
+4. WHEN the budget is exhausted, THEN the system SHALL still geocode the address, show the historic map overlay and list the sheet years, because none of these need the model. It SHALL say plainly that AI reading is paused until the next day and point to the showcase addresses.
+5. WHEN the provider returns a daily-quota 429 (`x-should-retry: false`), THEN the system SHALL treat the budget as exhausted for the rest of the day, and SHALL NOT retry in a loop.
+6. The model provider SHALL be set entirely by server configuration (`MODEL_BASE_URL`, `MODEL_ID` and `MODEL_API_KEY`), so that switching provider needs no code change.
+
 ## Requirement 8: Secrets and access
 
 **User story:** As the owner, I want keys kept out of the repo and browser, so that they cannot be stolen.

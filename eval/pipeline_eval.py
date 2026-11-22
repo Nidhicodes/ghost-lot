@@ -28,7 +28,8 @@ def tank_count(text):
 
 g = gold()
 general_prompt = ns["PROMPT"]
-PARTIAL = "crops/half/pipeline_partial.jsonl"  # one line per finished crop, so a killed run resumes
+MODEL_TAG = re.sub(r"[^A-Za-z0-9.-]+", "_", ns["MODEL"])
+PARTIAL = f"crops/half/pipeline_partial.{MODEL_TAG}.jsonl"  # one line per finished crop, so a killed run resumes
 rows = {}
 try:
     for line in open(PARTIAL):
@@ -68,4 +69,5 @@ none_crops = [c for c, r in rows.items() if not r["gold"]]
 print("false-alarm crops (gold NONE, final non-empty):", [c for c in none_crops if rows[c]["final"]])
 print("pass-2 tank counts on NONE crops:", {c: rows[c]["pass2_tanks"] for c in none_crops})
 print("pass-2 used on:", [c for c, r in rows.items() if r["pass2_used"]])
-json.dump(rows, open("crops/half/pipeline_results.json", "w"), indent=1)
+print("model:", ns["MODEL"], "at", ns["BASE_URL"])
+json.dump(rows, open(f"crops/half/pipeline_results.{MODEL_TAG}.json", "w"), indent=1)

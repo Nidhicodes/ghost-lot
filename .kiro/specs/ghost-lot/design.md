@@ -104,6 +104,25 @@ For each sheet that intersects the search radius:
 3. A live lookup reads the tiles nearest the address first, so the most relevant pins arrive first.
 4. A paid Groq tier, or another provider, can be dropped in through `MODEL_ID` and the base URL, with no code changes.
 
+**Free-tier budget (Requirement 7a).**
+- Two counters live in KV:
+  - `reads:<UTC-or-Pacific date>` is incremented before every model call. Calls stop when it reaches `READ_BUDGET_PER_DAY`.
+  - `live:<ip>:<date>` counts live lookups per IP.
+- Calls are reserved before they are made. Each tile reserves one unit, and a refund is issued if the call fails before reaching the model.
+- A daily-quota 429 sets `reads:<date>` to the cap.
+- When the budget is spent, `/api/read` returns `{status: "paused", resumesAt}` immediately. The overlay and sheet list still load, because they come from `/api/sheets`, which never calls the model.
+- Showcases are served from committed JSON and never touch the counters.
+
+**Provider choice (researched 2026-11-22).** Listed for the record; the decision is pending Nidhi.
+
+| Provider | Free limit | Notes |
+|---|---|---|
+| Groq `qwen/qwen3.8-27b` (current) | 1,000 requests/day and 200K tokens/day, so about 80 tile reads/day | Confirmed by a live 429 and by [devhunt's list, checked 2026-10-14](https://devhunt.org/free-apis/llm). Inputs are not retained. |
+| Google Gemini Flash-Lite | Per-model RPD shown only in AI Studio. One secondary source reports 500 RPD for 3.1 Flash-Lite ([scriptbyai](https://www.scriptbyai.com/gemini-api-free-tier-limits/)) | No card needed, and it has an OpenAI-compatible endpoint. Free-tier prompts are used to improve Google products, which is acceptable here because the inputs are public-domain map scans. Not yet evaluated on our crops. |
+| OpenRouter `:free` models | 50 requests/day, or 1,000/day after a one-off $10 credit purchase | The free model list changes often. |
+| Cloudflare Workers AI | 10,000 Neurons/day | Its free vision-model list was not checked. |
+| Ollama, run locally on Nidhi's Mac | Unlimited | Usable only for precomputing showcases and running evals, not live lookups. A smaller local model may read worse. |
+
 **Versioning.** The cache key includes `MODEL_ID` and `PROMPT_VERSION`. Changing either one invalidates the cache.
 
 ## API

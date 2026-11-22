@@ -1,7 +1,13 @@
-"""Run a Groq vision model over the 20 labeled crops and score it against labels.md."""
+"""Run a vision model (any OpenAI-compatible endpoint) over the 20 labeled crops and score it against labels.md.
+
+Env: MODEL_BASE_URL (default Groq), MODEL_ID (default qwen/qwen3.8-27b), MODEL_API_KEY (falls back to GROQ_API_KEY).
+Gemini: MODEL_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai MODEL_ID=<flash-lite model id>
+"""
 import base64, json, os, re, sys, time, urllib.request, urllib.error
 
-MODEL = sys.argv[1] if len(sys.argv) > 1 else "qwen/qwen3.8-27b"
+BASE_URL = os.environ.get("MODEL_BASE_URL", "https://api.groq.com/openai/v1").rstrip("/")
+API_KEY = os.environ.get("MODEL_API_KEY") or os.environ.get("GROQ_API_KEY", "")
+MODEL = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("MODEL_ID", "qwen/qwen3.8-27b")
 ONLY = sys.argv[2].split(",") if len(sys.argv) > 2 else None
 CLASSES = ["FUEL", "AUTO", "INDUSTRIAL", "RAIL"]
 
@@ -38,9 +44,9 @@ def ask(path):
         ]}],
     }
     req = urllib.request.Request(
-        "https://api.groq.com/openai/v1/chat/completions",
+        f"{BASE_URL}/chat/completions",
         data=json.dumps(body).encode(),
-        headers={"Authorization": "Bearer " + os.environ["GROQ_API_KEY"],
+        headers={"Authorization": "Bearer " + API_KEY,
                  "Content-Type": "application/json", "User-Agent": "GhostLotSpike/0.1"})
     for attempt in range(8):
         try:
