@@ -98,7 +98,13 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 ## Day 7–9 (Nov 28–30): product
 
 - [ ] 6. Map UI
-  - [~] 6.x UI built on 2026-11-22. It passes typecheck, tests and build; **not yet visually checked**, because the agent's host blocks starting a dev server and its browser is unavailable. Nidhi to run `npm run dev` and send screenshots.
+  - [x] 6.x UI built on 2026-11-22 and **visually verified by Nidhi in Chrome**.
+    - Verified: the Fort Payne 1927 overlay lines up with today's streets, the dashed circle, the pins around it, and the popup with the AI-reading label and the tile image.
+    - Three bugs were fixed along the way:
+      1. MapLibre 6's worker failed under Vite. A plugin now serves it untransformed.
+      2. Pins went missing under StrictMode, because markers from the removed map stayed in the ref.
+      3. Pins stacked in the corner, because the CSS animation overrode MapLibre's positioning transform.
+    - After a pin change in dev, hot reload keeps the old markers, so a hard reload is needed.
     - The landing page leads with the showcase. There is an address search.
     - The results page has:
       - the MapLibre map on the OpenFreeMap dark style, with the Allmaps overlay, an opacity slider and a year picker;
@@ -114,7 +120,7 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     - The map stack (2 MB) is lazy-loaded, so the landing page is 235 kB.
     - A Vite dev plugin serves `api/*.ts` locally, on loopback only.
     - The handlers were checked with mock requests: geocode 200 and 404, sheets 200 / 400 / 405.
-  - [ ] 6.0 First, render `https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn00045_004.main.iiif.json` with `@allmaps/maplibre` over a MapLibre basemap, on both desktop and a phone. If it fails or runs slowly, switch to the fallback listed in design Open questions 1. _Req 2.1_
+  - [x] 6.0 (verified in the browser, as above) First, render `https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn00045_004.main.iiif.json` with `@allmaps/maplibre` over a MapLibre basemap, on both desktop and a phone. If it fails or runs slowly, switch to the fallback listed in design Open questions 1. _Req 2.1_
   - [ ] 6.1 Build the landing page (address box and showcase chips), the results map, the Allmaps overlay with an opacity slider and year picker, and the attribution line. _Req 1.5, 2_
   - [ ] 6.2 Write `src/content/hazards.json` with a cited source for each contaminant claim. Nidhi reviews it. _Req 5.2_
   - [ ] 6.3 Add ghost pins with a class colour and icon, and a popup with the tile image, the AI-reading label, the year and the distance. _Req 4_
