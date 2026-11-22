@@ -17,7 +17,7 @@ export function Results({ place, onBack }: { place: Place; onBack(): void }) {
   const [selected, setSelected] = useState<string | null>(null)
   const [problem, setProblem] = useState<string | null>(null)
   const centre = useMemo<[number, number]>(() => [place.lon, place.lat], [place])
-  const onProblem = useCallback((m: string) => setProblem((p) => p ?? m), [])
+  const onProblem = useCallback((m: string, replace?: boolean) => setProblem((p) => (replace ? m : (p ?? m))), [])
 
   // live lookups: find the sheets (no AI involved, so this works even when reading is paused)
   useEffect(() => {

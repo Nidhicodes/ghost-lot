@@ -4,7 +4,40 @@ import 'maplibre-gl/dist/maplibre-gl.css'
 // MapLibre 6 looks for its worker next to its own module, which breaks once Vite pre-bundles it.
 // Vite's dev transform also injects its browser client into the worker, so the file is served
 // untouched at a fixed path by the maplibreWorker plugin in vite.config.ts.
-setWorkerUrl(`/maplibre-gl-worker-${getVersion()}.mjs`)
+const WORKER_URL = `/maplibre-gl-worker-${getVersion()}.mjs`
+setWorkerUrl(WORKER_URL)
+
+/**
+ * Start the worker the way MapLibre does and report exactly why it fails. MapLibre's own
+ * "Worker failed to load" message drops the browser's reason, so this probe recovers it.
+ */
+async function diagnoseWorker(): Promise<string> {
+  const parts = [`MapLibre ${getVersion()}`, `worker URL ${WORKER_URL}`]
+  try {
+    const res = await fetch(WORKER_URL, { cache: 'no-store' })
+    const text = await res.text()
+    parts.push(`fetch ${res.status} ${res.headers.get('content-type') ?? 'no content-type'} ${text.length} bytes${/@vite\/client/.test(text) ? ' (Vite client injected!)' : ''}`)
+  } catch (e) {
+    parts.push(`fetch failed: ${(e as Error).message}`)
+  }
+  const outcome = await new Promise<string>((resolve) => {
+    let w: Worker
+    try {
+      w = new Worker(WORKER_URL, { type: 'module' })
+    } catch (e) {
+      resolve(`new Worker threw: ${(e as Error).message}`)
+      return
+    }
+    const timer = setTimeout(() => (w.terminate(), resolve('worker started without error')), 3000)
+    w.onerror = (ev) => {
+      clearTimeout(timer)
+      w.terminate()
+      resolve(`worker error: ${ev.message || '(no message)'} at ${ev.filename || '?'}:${ev.lineno || '?'}`)
+    }
+  })
+  parts.push(outcome)
+  return parts.join(' · ')
+}
 import { WarpedMapLayer } from '@allmaps/maplibre'
 import { circlePolygon } from '../geo/distance'
 import type { Finding } from '../server/findings'
@@ -22,8 +55,8 @@ interface Props {
   findings: Finding[]
   selected: string | null
   onSelect(id: string | null): void
-  /** Shown to the user so a broken overlay is visible, not a silent black map. */
-  onProblem(message: string): void
+  /** Shown to the user so a broken overlay is visible, not a silent black map. `replace` overwrites an earlier message. */
+  onProblem(message: string, replace?: boolean): void
 }
 
 /** Build the pin popup with text nodes only: model-read text is untrusted and never parsed as HTML. */
@@ -65,7 +98,9 @@ export function MapView({ centre, radiusM, annotationUrls, opacity, findings, se
     m.addControl(new AttributionControl({ compact: false, customAttribution: ATTRIBUTION }), 'bottom-right')
     m.on('error', (e) => {
       console.error('map error', e.error)
-      onProblem(`Map error: ${e.error?.message ?? 'unknown'}`)
+      const msg = e.error?.message ?? 'unknown'
+      onProblem(`Map error: ${msg}`)
+      if (/Worker failed to load/.test(msg)) void diagnoseWorker().then((d) => onProblem(`Map error: ${msg} — ${d}`, true))
     })
     map.current = m
     ready.current = new Promise((resolve) =>
