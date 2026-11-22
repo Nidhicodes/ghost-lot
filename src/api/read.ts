@@ -1,14 +1,14 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { z } from 'zod'
-import { Budget } from '../src/server/budget'
-import { lookupDeps } from '../src/server/deps'
-import { handler } from '../src/server/http'
-import { findSheetsDetailed, SheetsQuery } from '../src/server/lookup'
-import { clientKey } from '../src/server/rateLimit'
-import { readLookup } from '../src/server/readSession'
-import { sharedStore } from '../src/server/sharedStore'
-import { fetchTileImage } from '../src/server/vision/image'
-import { callVisionModel, modelConfigFromEnv } from '../src/server/vision/model'
+import { Budget } from '../server/budget'
+import { lookupDeps } from '../server/deps'
+import { handler } from '../server/http'
+import { findSheetsDetailed, SheetsQuery } from '../server/lookup'
+import { clientKey } from '../server/rateLimit'
+import { readLookup } from '../server/readSession'
+import { sharedStore } from '../server/sharedStore'
+import { fetchTileImage } from '../server/vision/image'
+import { callVisionModel, modelConfigFromEnv } from '../server/vision/model'
 
 const ReadQuery = SheetsQuery.extend({ year: z.coerce.number().int().min(1860).max(1930).optional() })
 

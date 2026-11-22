@@ -28,6 +28,22 @@ curl -o data/raw/mapsnap-v2.0-loc.zip https://data.mapsnap.org/runs/v2.0/mapsnap
 npm run build-index    # about 40 s; writes index/ (13 MB)
 ```
 
+## Deploy (Vercel, prebuilt)
+
+The API handlers in `src/api/` are bundled with esbuild into a Vercel Build Output directory, and the sheet index is copied in alongside them. Vercel never compiles TypeScript.
+
+1. Create a free Upstash Redis database: either Vercel Marketplace → Upstash, or upstash.com. Note its REST URL and token. Live reading needs it: on Vercel, `/api/read` refuses to run without a shared store, so the daily model budget cannot be overspent.
+2. In the Vercel project settings, set:
+   - `MODEL_BASE_URL`, `MODEL_ID` and `MODEL_API_KEY`;
+   - `KV_REST_API_URL` and `KV_REST_API_TOKEN`;
+   - optionally `READ_BUDGET_PER_DAY` and `LIVE_LOOKUPS_PER_IP_PER_DAY`.
+3. Build and deploy from a machine that has `index/` (see above):
+
+```sh
+npm run build:vercel                 # typecheck, vite build, bundle functions into .vercel/output
+npx vercel deploy --prebuilt --prod  # needs `npx vercel login` and `npx vercel link` once
+```
+
 ## Data and credits
 
 - Sheet images: Library of Congress, [Sanborn Maps Collection](https://www.loc.gov/collections/sanborn-maps/).

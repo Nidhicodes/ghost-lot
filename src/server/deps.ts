@@ -1,10 +1,18 @@
+import { existsSync } from 'node:fs'
 import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { gunzipSync } from 'node:zlib'
 import type { LookupDeps } from './lookup'
 import { annotationUrl, StateIndex, type PlaceRef, type SerializedStateIndex } from './sheetIndex'
 
-const INDEX_DIR = process.env.GHOST_LOT_INDEX_DIR ?? join(process.cwd(), 'index')
+/** Env override, then next to the bundled function (production), then the project root (dev, tests). */
+function findIndexDir(): string {
+  const candidates = [process.env.GHOST_LOT_INDEX_DIR, join(dirname(fileURLToPath(import.meta.url)), 'index'), join(process.cwd(), 'index')]
+  return candidates.find((d): d is string => !!d && existsSync(join(d, 'states.json'))) ?? join(process.cwd(), 'index')
+}
+
+const INDEX_DIR = findIndexDir()
 const STATE_CODE = /^[A-Z]{2}$/
 const ITEM_ID = /^[A-Za-z0-9_]{1,40}$/
 

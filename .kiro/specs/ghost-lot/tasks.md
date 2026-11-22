@@ -41,7 +41,7 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     - tests that run only when the built index exists: 100 Gault Ave N, Fort Payne returns `sanborn00045_004` (1927), and a point 30 km away returns nothing.
 
     All 28 tests pass. _Req 1.3, 1.4_
-  - [ ] 3.4 Decide how `index/` reaches production (it is git-ignored). The options are to run `build-index` in the Vercel build (a 132 MB download per deploy) or to commit the 13 MB. Decide in task 7.5.
+  - [x] 3.4 Decided 2026-11-22: production uses a **prebuilt deploy**. `npm run build:vercel` copies `index/` into the `sheets` and `read` functions (14 MB each), and the index stays out of git. Original task: Decide how `index/` reaches production (it is git-ignored). The options are to run `build-index` in the Vercel build (a 132 MB download per deploy) or to commit the 13 MB. Decide in task 7.5.
 - [ ] 4. Lookup API
   - [x] 4.1 `/api/geocode` and `/api/sheets` (done 2026-11-22). The `api/` files are thin wrappers over `src/server/{geocode,lookup,tiles,deps,http,rateLimit}.ts`.
     - Requests are validated with zod: the radius is 25–400 m and the point must be in the US lat/lon box.
@@ -143,7 +143,19 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
   - [ ] 7.2 Run a Kiro Crew precompute with three roles: a planner, parallel readers, and a skeptic that re-reads each finding against its image. Commit the results JSON and log the skeptic's disagreements. _Req 7.1_
   - [ ] 7.3 Build the local `ghost-lot` MCP server with `find_sheets` and `read_tile`, and use it while debugging. _Design: Kiro usage plan_
   - [ ] 7.4 Write a Playwright smoke test: a showcase address loads in under 3 s, shows at least one pin, and its popup opens. _Req 7.1_
-  - [ ] 7.5 Deploy to Vercel. Before the repo goes public, rotate the Groq key and set it as a server environment variable. _Req 8.1_
+  - [~] 7.5 Deploy work, code side done 2026-11-22:
+    - `UpstashStore` is a REST pipeline client. `sharedStore` uses Upstash when it is configured, uses memory locally, and **refuses to run on Vercel** without a shared store.
+    - The per-IP rate limit now lives in the shared store. If the store is down, requests are allowed; the model budget still fails closed.
+    - The API moved from `api/` to `src/api/`. `scripts/build-vercel.mts` bundles each handler with esbuild into `.vercel/output` (Build Output API v3) and adds security headers.
+    - Why the bundling: deploying raw `api/*.ts` would crash in production, because the extensionless imports and JSON imports do not resolve under Node ESM.
+    - Smoke-tested the bundles from an unrelated working directory:
+      - geocode returned 200;
+      - sheets returned 200 (Pittsburgh: 3 years, 9 sheets);
+      - read streamed `plan` then `paused` with the budget set to 0;
+      - read with `VERCEL=1` and no KV returned 502 (fails closed).
+    - **Still needed from Nidhi:** an Upstash database, rotated keys, a Vercel login, the project env vars, and `vercel deploy --prebuilt`.
+
+    Original task: Deploy to Vercel. Before the repo goes public, rotate the Groq key and set it as a server environment variable. _Req 8.1_
 
 ## Day 12–13 (Dec 3–4): submission
 

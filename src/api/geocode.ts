@@ -1,6 +1,6 @@
 import { z } from 'zod'
-import { AddressQuery, geocodeAddress } from '../src/server/geocode'
-import { handler } from '../src/server/http'
+import { AddressQuery, geocodeAddress } from '../server/geocode'
+import { handler } from '../server/http'
 
 const Query = z.object({ q: AddressQuery })
 

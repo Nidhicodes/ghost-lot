@@ -49,7 +49,7 @@ function devApi(): Plugin {
           return res.end()
         }
         try {
-          const mod = await server.ssrLoadModule(`/api/${name}.ts`)
+          const mod = await server.ssrLoadModule(`/src/api/${name}.ts`)
           const vreq = Object.assign(req, { query: Object.fromEntries(url.searchParams) })
           const vres = Object.assign(res, {
             status(code: number) {
