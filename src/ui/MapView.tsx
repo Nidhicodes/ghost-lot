@@ -1,6 +1,11 @@
 import { useEffect, useRef } from 'react'
-import { AttributionControl, Map as MapLibreMap, Marker, NavigationControl, Popup, type GeoJSONSource } from 'maplibre-gl'
+import { AttributionControl, Map as MapLibreMap, Marker, NavigationControl, Popup, setWorkerUrl, type GeoJSONSource } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
+// MapLibre 6 looks for its worker next to its own module, which breaks once Vite pre-bundles
+// or bundles it; `?url` makes Vite serve and emit the worker file and gives us its real URL.
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
+
+setWorkerUrl(maplibreWorkerUrl)
 import { WarpedMapLayer } from '@allmaps/maplibre'
 import { circlePolygon } from '../geo/distance'
 import type { Finding } from '../server/findings'
