@@ -5,7 +5,7 @@ import { MapView } from './MapView'
 import { RiskCard } from './RiskCard'
 import type { Place } from './places'
 
-type Status = { kind: 'loading' } | { kind: 'reading'; done: number; total: number } | { kind: 'done' } | { kind: 'paused'; why: 'daily_budget' | 'client_limit' } | { kind: 'error'; message: string }
+type Status = { kind: 'loading'; waking?: boolean } | { kind: 'reading'; done: number; total: number } | { kind: 'done' } | { kind: 'paused'; why: 'daily_budget' | 'client_limit' } | { kind: 'error'; message: string }
 
 export function Results({ place, onBack }: { place: Place; onBack(): void }) {
   const [lookup, setLookup] = useState<LookupResult | null>(null)
@@ -22,7 +22,7 @@ export function Results({ place, onBack }: { place: Place; onBack(): void }) {
   // live lookups: find the sheets (no AI involved, so this works even when reading is paused)
   useEffect(() => {
     if (place.showcase) return
-    findSheets(place.lat, place.lon, place.radiusM)
+    findSheets(place.lat, place.lon, place.radiusM, () => setStatus({ kind: 'loading', waking: true }))
       .then((r) => {
         setLookup(r)
         setYear(r.defaultYear)
@@ -129,7 +129,9 @@ export function Results({ place, onBack }: { place: Place; onBack(): void }) {
 function StatusLine({ status }: { status: Status }) {
   const text =
     status.kind === 'loading'
-      ? 'Finding old maps…'
+      ? status.waking
+        ? 'Waking the ghosts… the free server takes up to a minute'
+        : 'Finding old maps…'
       : status.kind === 'reading'
         ? status.total
           ? `Reading tile ${status.done} of ${status.total}`

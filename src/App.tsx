@@ -1,6 +1,6 @@
-import { lazy, Suspense, useState, type FormEvent } from 'react'
+import { lazy, Suspense, useEffect, useState, type FormEvent } from 'react'
 import hazards from './content/hazards.json'
-import { geocode } from './ui/api'
+import { ensureAwake, geocode } from './ui/api'
 import { SHOWCASES, showcasePlace, type Place } from './ui/places'
 
 // the map stack (MapLibre + Allmaps) is ~2 MB; load it only when a place is opened
@@ -20,19 +20,26 @@ export default function App() {
 function Landing({ onPlace }: { onPlace(p: Place): void }) {
   const [q, setQ] = useState('')
   const [busy, setBusy] = useState(false)
+  const [waking, setWaking] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  // start waking the free API while the visitor reads the page, so their first lookup is quick
+  useEffect(() => {
+    ensureAwake().catch(() => {})
+  }, [])
 
   async function submit(e: FormEvent) {
     e.preventDefault()
     setBusy(true)
     setError(null)
     try {
-      const g = await geocode(q)
+      const g = await geocode(q, () => setWaking(true))
       onPlace({ matched: g.matched, lon: g.lon, lat: g.lat, radiusM: 150 })
     } catch (err) {
       setError((err as Error).message)
     } finally {
       setBusy(false)
+      setWaking(false)
     }
   }
 
@@ -64,9 +71,14 @@ function Landing({ onPlace }: { onPlace(p: Place): void }) {
         <div className="row">
           <input id="q" value={q} onChange={(e) => setQ(e.target.value)} placeholder="100 Gault Ave N, Fort Payne, AL" autoComplete="street-address" minLength={5} maxLength={200} required />
           <button type="submit" disabled={busy}>
-            {busy ? 'Finding…' : 'Look up'}
+            {busy ? (waking ? 'Waking the ghosts…' : 'Finding…') : 'Look up'}
           </button>
         </div>
+        {waking && (
+          <p className="muted small" role="status">
+            The free server naps when no one is visiting. Waking it takes up to a minute, once.
+          </p>
+        )}
         {error && (
           <p className="error" role="alert">
             {error}

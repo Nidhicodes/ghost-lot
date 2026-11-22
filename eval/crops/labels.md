@@ -31,6 +31,7 @@ Hazard classes (environmental history worth flagging):
 | c17 | Fort Payne 1927 s10 | Forest Av | none; dwellings + private auto sheds | NONE |
 | c18 | Fort Payne 1927 s11 | Park | none; dwellings + private auto sheds | NONE |
 | c19 | Fort Payne 1927 s12 | Grand Av, Shields (Washington) | none; dwellings + private auto sheds | NONE |
+| c20 | Fort Payne 1927 sheet 0011, half-res tile 4600,2300,1852,2500 (half set only) | Seventh, Sixth (Boddie) | "AUTO REP'G." (top-left); otherwise dwellings, private auto sheds "A", stores "S.", stove marks "o", water pipes; NO G.T. marks | AUTO |
 
 ## Summary
 - 20 crops: 12 NONE (c00, c01, c02, c06, c08, c09, c12, c13, c16, c17, c18, c19); 8 with at least one hazard class (c03, c04, c05, c07, c10, c11, c14, c15). c15 is rail-only; c05 and c07 hazards are cut off at the crop edge.
@@ -43,3 +44,7 @@ Hazard classes (environmental history worth flagging):
 These are the same crop centres at 2500 × 2500 scan px, sent as 1250 px. The original crops were 2400 px, so each half region shows a little more map at its edges.
 - **c13 (half): add RAIL.** The A.G.S. R.R. tracks appear along the bottom edge, below Warehouse Lane. The agent checked this against the image. The original 2400 px c13 stays NONE.
 - The other rows are not re-labelled for the extra edge strip. A hazard that sits only in that strip would not be counted, so recall on the half set may be slightly overstated.
+
+## c20: pass-2 false-tank regression (added 2026-11-22)
+
+The Kiro Crew skeptic pass found two pass-2 "gasoline tank" findings on this exact tile that are not on the map. Pass 1 reads the auto-repair shop (AUTO), which triggers pass 2, and pass 2 reported tank marks in cells that hold only dwellings, auto sheds and small "o" stove marks. The image is the tile exactly as the app sends it (926 px wide, 2x downscale). A person checked the close-ups and confirmed there is no G.T. on the tile. The heavy black line across the middle has no R.R. label in this crop, so it is not counted as RAIL. Gold: AUTO only, so any FUEL here is a false positive.

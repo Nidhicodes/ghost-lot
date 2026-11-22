@@ -152,7 +152,13 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
       - Corrected 1: "FORMERLY R. SM." to "FORMERLY BL.SM." (blacksmith).
       - Kept 2: the Seattle gas holders. The skeptic wanted FUEL, but that rule came from its brief, not from the app's prompt.
     - Result: 56 findings became 51.
-    - **Found:** pass 2 can report tank marks that are not there. The 20-crop eval missed this because its hazard-free crops have no auto tiles to trigger pass 2. Open: add such a crop to the eval (5.5) before changing the pass-2 prompt.
+    - **Found:** pass 2 can report tank marks that are not there. The 20-crop eval missed this because its hazard-free crops have no auto tiles to trigger pass 2.
+    - **Fixed 2026-11-22, eval first:**
+      1. Added `c20`, the exact Fort Payne tile, to the eval with gold AUTO only. It reproduced the bug on prompts v2: pass 2 counted 2 tanks, giving FUEL as a false positive.
+      2. The gate had passed anyway, because it only checked hazard-free crops, so it now also fails on any false-positive class.
+      3. Prompts v3: pass 2 counts a mark only when the "G.T."/"GTS." letters are readable next to it, names the unlabeled circles that are not tanks, and says 0 is a normal answer.
+      4. The gated run passed: recall 1.00, 0 false positives, c20 at 0 tanks, and tanks still found on c03, c04, c11 and c14.
+    - Caveat: in this eval, pass 1 already finds FUEL on every FUEL crop, so pass 2's ability to catch a tank that pass 1 missed is not directly measured.
   - [x] 7.3 Local `ghost-lot` MCP server (done 2026-11-22). _Design: Kiro usage plan_
     - Code: `src/mcp/server.ts` (tools) and `scripts/mcp-server.ts` (stdio entry, reads `.env`). Registered in `.kiro/settings/mcp.json`; `find_sheets` is auto-approved, `read_tile` asks first because it spends model quota.
     - `find_sheets(lat, lon, radius_m)`: years, sheets and the nearest-first reading plan with tile URLs. No model calls.
@@ -181,6 +187,8 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     - Kept as an alternative: the Vercel prebuilt path.
     - **Live on 2026-11-22** at https://ghost-lot.onrender.com (API: https://ghost-lot-api.onrender.com). The first Upstash token pasted was the read-only one (NOPERM on INCRBY); replaced with the standard token.
     - External checks after the fix: Fort Payne at 100 m read 9 of 9 tiles live (8, then `more`, then resumed from cache to `done`); the rate limit returned 429 from the 31st request in a minute.
+    - Judging runs Dec 16, 2026 to Jan 29, 2027, so the API must stay warm for weeks. `.github/workflows/keep-warm.yml` pings `/api/health` every 10 minutes; one free service running all month uses at most 744 of Render's 750 free hours. On the site, `ensureAwake` (`src/ui/api.ts`) starts waking the API when the landing page opens, and shows "Waking the ghosts…" if a lookup has to wait. While Render wakes, it serves its own loading page without CORS headers, so the client retries `/api/health` for up to 2 minutes instead of failing.
+    - Spoof test re-run after the `cf-connecting-ip` fix: a fake `X-Forwarded-For` now gets 429, and a faked `CF-Connecting-IP` is rejected by Cloudflare with 403.
     - **Found by the spoof test:** a fake `X-Forwarded-For` got past the rate limit, because Render sits behind Cloudflare and keeps the client's value first. `clientKey` now prefers `cf-connecting-ip`, which Cloudflare overwrites. Re-run the spoof test after the next deploy.
 
     Original task: Deploy to Vercel. Before the repo goes public, rotate the Groq key and set it as a server environment variable. _Req 8.1_

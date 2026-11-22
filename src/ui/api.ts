@@ -11,6 +11,55 @@ export interface Geocoded {
   matched: string
 }
 
+const WAKE_SLOW_MS = 2_500
+const WAKE_GIVE_UP_MS = 120_000
+/** Render spins the free API down after 15 idle minutes; re-check well before that. */
+const AWAKE_FOR_MS = 10 * 60_000
+
+let waking: Promise<void> | undefined
+let awakeAt = 0
+let slow = false
+const slowListeners = new Set<() => void>()
+
+/**
+ * Resolve once the API answers /api/health. The free Render API takes about a minute to wake,
+ * and while it does, requests fail (Render serves its own loading page without CORS headers),
+ * so callers wait here instead. `onSlow` fires if waking takes longer than a moment.
+ */
+export function ensureAwake(onSlow?: () => void): Promise<void> {
+  if (Date.now() - awakeAt < AWAKE_FOR_MS) return Promise.resolve()
+  if (onSlow) {
+    if (slow) onSlow()
+    else slowListeners.add(onSlow)
+  }
+  waking ??= (async () => {
+    const timer = setTimeout(() => {
+      slow = true
+      for (const l of slowListeners) l()
+    }, WAKE_SLOW_MS)
+    try {
+      for (const started = Date.now(); Date.now() - started < WAKE_GIVE_UP_MS; ) {
+        try {
+          if ((await fetch(`${API}/api/health`, { signal: AbortSignal.timeout(20_000) })).ok) {
+            awakeAt = Date.now()
+            return
+          }
+        } catch {
+          // still waking; Render's loading page has no CORS headers, so this looks like a network error
+        }
+        await new Promise((r) => setTimeout(r, 3_000))
+      }
+      throw new Error('The map service did not wake up. Try again in a minute.')
+    } finally {
+      clearTimeout(timer)
+      slow = false
+      slowListeners.clear()
+      waking = undefined
+    }
+  })()
+  return waking
+}
+
 async function getJson<T>(url: string): Promise<T> {
   const res = await fetch(url)
   const body = await res.json().catch(() => ({}))
@@ -18,10 +67,15 @@ async function getJson<T>(url: string): Promise<T> {
   return body as T
 }
 
-export const geocode = (q: string) => getJson<Geocoded>(`${API}/api/geocode?${new URLSearchParams({ q })}`)
+export const geocode = async (q: string, onSlow?: () => void) => {
+  await ensureAwake(onSlow)
+  return getJson<Geocoded>(`${API}/api/geocode?${new URLSearchParams({ q })}`)
+}
 
-export const findSheets = (lat: number, lon: number, r: number) =>
-  getJson<LookupResult>(`${API}/api/sheets?${new URLSearchParams({ lat: String(lat), lon: String(lon), r: String(r) })}`)
+export const findSheets = async (lat: number, lon: number, r: number, onSlow?: () => void) => {
+  await ensureAwake(onSlow)
+  return getJson<LookupResult>(`${API}/api/sheets?${new URLSearchParams({ lat: String(lat), lon: String(lon), r: String(r) })}`)
+}
 
 export interface ReadHandlers {
   onEvent(ev: ReadEvent): void

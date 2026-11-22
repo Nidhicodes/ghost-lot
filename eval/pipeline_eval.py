@@ -1,11 +1,11 @@
-"""Eval of the shipped reading pipeline on the 20 labeled regions at half resolution.
+"""Eval of the shipped reading pipeline on the labeled regions (c00-c20) at half resolution.
 
 Pass 1 (general) runs on every crop in crops/half/. Pass 2 (tanks) runs on every crop too, so its
 false positives can be measured; the pipeline only *uses* pass 2 where pass 1 flagged AUTO/FUEL
 (or read GARAGE / FILLING / OIL). A crop's final classes = pass-1 classes, plus FUEL if a used
 pass 2 counted >= 1 tank. Writes crops/half/pipeline_results.json and prints the scores.
-With EVAL_GATE=1 it exits non-zero when final recall < 0.80 or any hazard-free crop gets a
-finding (the Kiro hook in .kiro/hooks/prompt-eval.json).
+With EVAL_GATE=1 it exits non-zero when final recall < 0.80, any hazard-free crop gets a
+finding, or any crop gets a class its label lacks (the Kiro hook in .kiro/hooks/prompt-eval.json).
 """
 import hashlib, json, os, re, sys, time
 
@@ -83,6 +83,8 @@ if os.environ.get("EVAL_GATE") == "1":
     tp, fp, fn = score("final")
     alarms = [c for c in none_crops if rows[c]["final"]]
     recall = tp / (tp + fn) if tp + fn else 0.0
-    if recall < 0.80 or alarms:
-        sys.exit(f"EVAL GATE FAILED: recall {recall:.2f} (need >= 0.80), false alarms on {alarms or 'none'}")
-    print(f"EVAL GATE PASSED: recall {recall:.2f}, no false alarms")
+    wrong = sorted(c for c, r in rows.items() if set(r["final"]) - set(r["gold"]))
+    if recall < 0.80 or alarms or fp:
+        sys.exit(f"EVAL GATE FAILED: recall {recall:.2f} (need >= 0.80), false alarms on {alarms or 'none'}, "
+                 f"{fp} false-positive classes on {wrong or 'none'}")
+    print(f"EVAL GATE PASSED: recall {recall:.2f}, no false alarms, no false-positive classes")
