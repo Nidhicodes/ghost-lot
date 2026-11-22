@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Banned-phrase lint on copy",
+      "description": "Ghost Lot shows historical leads, not findings. Any edit to user-facing copy re-runs the lint that rejects claims like 'site is contaminated', 'toxic' or 'verified safe' (src/content/banned.ts, steering safety-language.md).",
+      "trigger": "PostFileSave",
+      "matcher": "(src/(ui|content)/.*|src/App\\.tsx|index\\.html|README\\.md)$",
+      "action": { "type": "command", "command": "npx vitest run src/content/safety.test.ts --reporter=dot" },
+      "timeout": 120
+    }
+  ]
+}

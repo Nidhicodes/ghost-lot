@@ -27,11 +27,14 @@ export class RateLimiter {
 }
 
 /**
- * Vercel puts the real client IP first in x-forwarded-for. Outside Vercel the header is
- * client-controlled, so this is only trustworthy behind Vercel's proxy.
+ * Render sits behind Cloudflare, which overwrites cf-connecting-ip with the real client IP;
+ * the first x-forwarded-for entry there is client-supplied. Vercel overwrites x-forwarded-for,
+ * so the fallback is only trustworthy behind Vercel's proxy.
  */
 export function clientKey(headers: Record<string, string | string[] | undefined>): string {
-  const xff = headers['x-forwarded-for']
-  const first = (Array.isArray(xff) ? xff[0] : xff)?.split(',')[0]?.trim()
-  return first || 'unknown'
+  const one = (name: string) => {
+    const v = headers[name]
+    return (Array.isArray(v) ? v[0] : v)?.split(',')[0]?.trim() || undefined
+  }
+  return one('cf-connecting-ip') ?? one('x-forwarded-for') ?? 'unknown'
 }

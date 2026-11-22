@@ -8,23 +8,48 @@ Ghost Lot shows historical leads, not findings. Only an environmental assessment
 
 Built for [Kiroween 2026](https://kiroween.devpost.com/) (Frankenstein category).
 
-> Status: early setup. See `.kiro/specs/ghost-lot/` for the requirements, design and task plan.
+**Live demo:** https://ghost-lot.onrender.com. The three showcase places load instantly. A new address is read live, capped at 2 per visitor per day on the free model tier. The API sleeps when idle, so the first live lookup can take up to a minute to wake it.
+
+## How it works
+
+1. **Find the sheets.** The US Census geocoder turns the address into coordinates. A prebuilt index of 261,792 Sanborn sheets dated 1867–1930 finds the ones that cover a circle around that point. The sheets were georeferenced by [mapsnap](https://mapsnap.org/).
+2. **Overlay them.** Allmaps warps each sheet onto today's map in the browser.
+3. **Read them.** The server cuts the circle into tiles at half resolution, nearest first, and sends each one to a vision model (Gemini 3.5 Flash-Lite). Pass 1 lists FUEL, AUTO, INDUSTRIAL and RAIL uses with the map's own text. When pass 1 sees a garage or fuel, pass 2 counts gasoline-tank marks on the same tile.
+4. **Place the pins.** Each finding is mapped back from scan pixels to coordinates with the same Allmaps transform that draws the overlay, so pins sit on the right building. The risk card groups them by distance and lists, from EPA sources, what each past use can leave behind and what to ask next.
+
+Readings are cached for 90 days. A daily budget stops live reading before the free quota runs out, and the overlay keeps working when reading is paused.
+
+## How Kiro was used
+
+Everything Kiro uses is committed in `.kiro/`:
+
+- **Spec** (`.kiro/specs/ghost-lot/`): requirements, design and a dated task plan, kept up to date as decisions changed (for example the switch from Groq to Gemini, and from Vercel to Render).
+- **Steering** (`.kiro/steering/`): product, tech and structure are always loaded. `safety-language.md` loads for UI, content and prompt files. `vision-prompts.md` loads for prompts and the eval.
+- **Hooks** (`.kiro/hooks/`):
+  - editing a vision prompt re-runs the 20-crop eval, and the hook fails on a recall drop or a false alarm;
+  - editing geometry code re-runs the geometry property tests;
+  - editing user-facing copy re-runs the banned-phrase lint.
+- **MCP server** (`.kiro/settings/mcp.json`): a local `ghost-lot` server with `find_sheets` and `read_tile`, so the agent can check a lookup or re-read one tile from chat while debugging.
+- **Property-based tests** (fast-check) for the geometry, tile planner and finding merges.
 
 ## Run locally
 
+Needs Node 22+ and Python 3 for the eval.
+
 ```sh
 npm install
-cp .env.example .env   # add your GROQ_API_KEY; never commit .env
+cp .env.example .env   # set MODEL_BASE_URL, MODEL_ID, MODEL_API_KEY; never commit .env
+npm run fetch-data && npm run build-index   # one-time, see below
 npm run dev            # http://localhost:5173
 npm test
+npm run eval           # prompt regression gate: about 40 model calls
+npm run mcp            # the MCP server on stdio (Kiro starts it from .kiro/settings/mcp.json)
 ```
 
 ## Build the sheet index
 
 ```sh
-mkdir -p data/raw
-curl -o data/raw/items.tsv https://data.mapsnap.org/runs/v2.0/items.tsv
-curl -o data/raw/mapsnap-v2.0-loc.zip https://data.mapsnap.org/runs/v2.0/mapsnap-v2.0-loc.zip   # 132 MB
+npm run fetch-data     # mapsnap v2.0 items.tsv and the 132 MB annotation zip, into data/raw/
 npm run build-index    # about 40 s; writes index/ (13 MB)
 ```
 

@@ -144,5 +144,7 @@ describe('RateLimiter', () => {
   it('takes the first x-forwarded-for entry as the client key', () => {
     expect(clientKey({ 'x-forwarded-for': '203.0.113.7, 10.0.0.1' })).toBe('203.0.113.7')
     expect(clientKey({})).toBe('unknown')
+    // behind Cloudflare (Render), a spoofed x-forwarded-for must not change the key
+    expect(clientKey({ 'cf-connecting-ip': '198.51.100.2', 'x-forwarded-for': '1.2.3.4, 198.51.100.2' })).toBe('198.51.100.2')
   })
 })

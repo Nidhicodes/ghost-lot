@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "ghost-lot": {
+      "command": "npx",
+      "args": ["tsx", "scripts/mcp-server.ts"],
+      "disabled": false,
+      "autoApprove": ["find_sheets"]
+    }
+  }
+}

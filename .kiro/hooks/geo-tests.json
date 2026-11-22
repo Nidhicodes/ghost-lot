@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Geometry tests on save",
+      "description": "Pins must land where the overlay is drawn. Any edit to src/geo/ re-runs its unit and property tests (round-trips, haversine, clipping, radius).",
+      "trigger": "PostFileSave",
+      "matcher": "src/geo/.*\\.ts$",
+      "action": { "type": "command", "command": "npx vitest run src/geo --reporter=dot" },
+      "timeout": 120
+    }
+  ]
+}

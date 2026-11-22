@@ -4,7 +4,7 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 
 ## Day 1–2 (Nov 22–23): foundations
 
-- [ ] 1. Project setup
+- [x] 1. Project setup
   - [x] 1.1 Verify the external dependencies before writing any code. Write the results into `design.md` and replace each *verify* note there. _Req 1, 2_ (done 2026-11-22)
     - [x] Allmaps MapLibre package: `@allmaps/maplibre@1.0.0-beta.44`, MIT, with `WarpedMapLayer` and `addGeoreferenceAnnotationByUrl`. **Rendering checked in the Allmaps Viewer** (Nidhi's screenshot, 2026-11-22): the Fort Payne 1927 sheets warp into one continuous map, and the old street lines continue today's streets (3rd, 2nd and 1st Streets, and Gault Avenue North) at the edges. The Viewer is not our MapLibre setup, so 6.0 still checks the plugin itself and phone performance.
     - [x] US Census geocoder: works with no key. The response shape is recorded in `design.md`.
@@ -19,15 +19,15 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     - `.kiro/` must stay committed.
     _Req 8.2_
   - [x] 1.3 Add the steering files. Done 2026-11-22. Always included: `product.md`, `tech.md` and `structure.md`. Included on matching files: `safety-language.md` (UI, content, prompts and docs) and `vision-prompts.md` (prompts and eval). _Req 6_
-  - [ ] 1.4 Move `eval/` into the repo layout and make `vision_eval.py` read prompts from `src/server/prompts/`. Add a `make eval` target. _Req 3_
-- [ ] 2. Geometry module `src/geo/`
+  - [x] 1.4 `eval/` lives in the repo, and both eval scripts read prompts from `src/server/prompts/prompts.json`. The target is `npm run eval` (`eval/gate.sh`) instead of `make eval`. _Req 3_
+- [x] 2. Geometry module `src/geo/`
   - [x] 2.1 Parse the annotation and wrap Allmaps' `ProjectedGcpTransformer`. Refuse any transform other than polynomial order 1 or Helmert. Code: `src/geo/annotation.ts` and `transform.ts`. _Req 2.1, 4.1_
   - [x] 2.2 Implement haversine, destination point, circle polygon and convex clipping, plus `radiusOnSheet`. Code: `src/geo/distance.ts`, `polygon.ts` and `radius.ts`. _Req 1.3_
   - [x] 2.3 Write 19 tests in `annotation.test.ts` and `geo.prop.test.ts`, covering round-trips on real and random sheets, haversine, clipping and radius. They passed on 3 consecutive runs. _Req 4.1_
 
 ## Day 3–4 (Nov 24–25): data
 
-- [ ] 3. Sheet index
+- [x] 3. Sheet index
   - [x] 3.1 `npm run build-index` (done 2026-11-22). The build takes 39 s and produces:
     - 27,332 volumes dated 1930 or earlier,
     - 261,792 sheet images,
@@ -42,7 +42,7 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 
     All 28 tests pass. _Req 1.3, 1.4_
   - [x] 3.4 Decided 2026-11-22: production uses a **prebuilt deploy**. `npm run build:vercel` copies `index/` into the `sheets` and `read` functions (14 MB each), and the index stays out of git. Original task: Decide how `index/` reaches production (it is git-ignored). The options are to run `build-index` in the Vercel build (a 132 MB download per deploy) or to commit the 13 MB. Decide in task 7.5.
-- [ ] 4. Lookup API
+- [x] 4. Lookup API
   - [x] 4.1 `/api/geocode` and `/api/sheets` (done 2026-11-22). The `api/` files are thin wrappers over `src/server/{geocode,lookup,tiles,deps,http,rateLimit}.ts`.
     - Requests are validated with zod: the radius is 25–400 m and the point must be in the US lat/lon box.
     - The rate limit is GET-only, 30 requests per minute per IP, and in memory per instance. The KV-backed version comes in 5.2.
@@ -52,7 +52,7 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
       - 1600 Pennsylvania Ave NW: 1888 and 1903 maps, 5 sheets, 1.2 s.
     _Req 1, 8.3_
   - [x] 4.2 Property-based tests for the tile planner, plus lookup, geocoder and rate-limit tests. All 49 tests pass. _Req 3.3_
-  - [~] 4.3 Tile count. Options (a), (b) and (c) were implemented on 2026-11-22:
+  - [x] 4.3 Tile count. Options (a), (b) and (c) were implemented on 2026-11-22:
     - Pass 1 reads at 2× downscale (2,500 scan px sent as 1,250 px), and `refineTile` produces native-resolution tiles for pass 2.
     - Only the newest year is read, nearest tile first, through `readingPlan`.
     - Result for Fort Payne 1927 at 150 m: 38 tiles became 17 (8 at 100 m). For 1600 Pennsylvania Ave (1903): 11 tiles at 150 m and 4 at 100 m.
@@ -89,10 +89,14 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     - Groq stays as the fallback.
 
     Original task: Choose the vision provider. Get a Gemini key from Nidhi and read the Flash-Lite RPD in her AI Studio. Run `eval/pipeline_eval.py` with Gemini's `MODEL_BASE_URL`/`MODEL_ID`, and finish the Groq run once its daily tokens recover. Pick the provider with the better score within the free quota. The eval scripts are now provider-agnostic. _Req 7a.6_
-  - [ ] 5.2 Implement the worker queue with 429 backoff, the tile fetch with 3 retries, and the cache keyed by tile, model and prompt version. _Req 3.6, 7.2_
-  - [ ] 5.2a Add the daily read budget and the per-IP live-lookup cap in KV. Handle a daily-quota 429 by marking the day as spent. Return `paused` from `/api/read` while the overlay keeps working. _Req 7a.2–7a.5_
-  - [ ] 5.3 Implement `/api/read` as an SSE stream of per-tile progress. _Req 7.2_
-  - [ ] 5.4 Add a Kiro hook: saving any file in `src/server/prompts/*` runs `make eval`, which fails if recall drops below 0.80 or there is any false positive on hazard-free crops. _Req 3_
+  - [x] 5.2 (done in 5.2 / 5.2a above) Implement the worker queue with 429 backoff, the tile fetch with 3 retries, and the cache keyed by tile, model and prompt version. _Req 3.6, 7.2_
+  - [x] 5.2a (done in 5.2 / 5.2a above; KV store in 7.5) Add the daily read budget and the per-IP live-lookup cap in KV. Handle a daily-quota 429 by marking the day as spent. Return `paused` from `/api/read` while the overlay keeps working. _Req 7a.2–7a.5_
+  - [x] 5.3 (done above) Implement `/api/read` as an SSE stream of per-tile progress. _Req 7.2_
+  - [x] 5.4 Kiro hooks (done 2026-11-22), in `.kiro/hooks/`:
+    - `prompt-eval.json`: saving `src/server/prompts/*.json` runs `eval/gate.sh` (the pipeline eval with `EVAL_GATE=1`). It fails if class recall drops below 0.80 or any hazard-free crop gets a finding. The eval's resume cache is keyed by a hash of the prompts file, so an edit always re-runs. First gated run on Gemini: recall 1.00, 0 false alarms.
+    - `geo-tests.json`: saving `src/geo/*.ts` runs the geometry tests (19).
+    - `banned-phrases.json`: saving UI copy, content, `index.html` or the README runs the banned-phrase lint (16 tests).
+    _Req 3, 6.3_
   - [ ] 5.5 Grow the eval set to about 40 crops by adding one bigger city, such as a 1920s downtown with a rail yard. Nidhi hand-checks 5 of the agent's labels. _Req 3_
 
 ## Day 7–9 (Nov 28–30): product
@@ -121,13 +125,13 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     - A Vite dev plugin serves `api/*.ts` locally, on loopback only.
     - The handlers were checked with mock requests: geocode 200 and 404, sheets 200 / 400 / 405.
   - [x] 6.0 (verified in the browser, as above) First, render `https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn00045_004.main.iiif.json` with `@allmaps/maplibre` over a MapLibre basemap, on both desktop and a phone. If it fails or runs slowly, switch to the fallback listed in design Open questions 1. _Req 2.1_
-  - [ ] 6.1 Build the landing page (address box and showcase chips), the results map, the Allmaps overlay with an opacity slider and year picker, and the attribution line. _Req 1.5, 2_
+  - [x] 6.1 (done in 6.x) Build the landing page (address box and showcase chips), the results map, the Allmaps overlay with an opacity slider and year picker, and the attribution line. _Req 1.5, 2_
   - [ ] 6.2 Write `src/content/hazards.json` with a cited source for each contaminant claim. Nidhi reviews it. _Req 5.2_
-  - [ ] 6.3 Add ghost pins with a class colour and icon, and a popup with the tile image, the AI-reading label, the year and the distance. _Req 4_
-  - [ ] 6.4 Build the risk-card drawer: distance bands, fixed content, the disclaimer and the incomplete-reading banner. _Req 5.1, 5.3, 5.4, 6.2_
-  - [ ] 6.5 Implement the banned-phrase lint, used both as a unit test and as a Kiro hook on UI copy. _Req 6.1, 6.3_
-  - [ ] 6.6 Add a print stylesheet so the PDF export fits on one page. _Req 5.5_
-  - [ ] 6.7 Apply the Halloween theme (fog vignette, ghost glyphs, parchment drawer) and support `prefers-reduced-motion`. Check legibility at 375 px width. _Req 7.3_
+  - [x] 6.3 (done in 6.x) Add ghost pins with a class colour and icon, and a popup with the tile image, the AI-reading label, the year and the distance. _Req 4_
+  - [x] 6.4 (done in 6.x) Build the risk-card drawer: distance bands, fixed content, the disclaimer and the incomplete-reading banner. _Req 5.1, 5.3, 5.4, 6.2_
+  - [x] 6.5 (done in 6.x; hook added in 5.4) Implement the banned-phrase lint, used both as a unit test and as a Kiro hook on UI copy. _Req 6.1, 6.3_
+  - [x] 6.6 (done in 6.x) Add a print stylesheet so the PDF export fits on one page. _Req 5.5_
+  - [x] 6.7 (done in 6.x) Apply the Halloween theme (fog vignette, ghost glyphs, parchment drawer) and support `prefers-reduced-motion`. Check legibility at 375 px width. _Req 7.3_
 
 ## Day 10–11 (Dec 1–2): demo hardening
 
@@ -141,7 +145,11 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 
     Original task: Pick the 3 showcase addresses: Fort Payne, AL 1927 plus 2 well-known cities. Confirm that each has hazards within 150 m. _Req 7.1_
   - [ ] 7.2 Run a Kiro Crew precompute with three roles: a planner, parallel readers, and a skeptic that re-reads each finding against its image. Commit the results JSON and log the skeptic's disagreements. _Req 7.1_
-  - [ ] 7.3 Build the local `ghost-lot` MCP server with `find_sheets` and `read_tile`, and use it while debugging. _Design: Kiro usage plan_
+  - [x] 7.3 Local `ghost-lot` MCP server (done 2026-11-22). _Design: Kiro usage plan_
+    - Code: `src/mcp/server.ts` (tools) and `scripts/mcp-server.ts` (stdio entry, reads `.env`). Registered in `.kiro/settings/mcp.json`; `find_sheets` is auto-approved, `read_tile` asks first because it spends model quota.
+    - `find_sheets(lat, lon, radius_m)`: years, sheets and the nearest-first reading plan with tile URLs. No model calls.
+    - `read_tile(lat, lon, radius_m, tile)`: reads one tile through the same `readTile` the API uses and returns located findings. Capped at `MCP_READS_PER_RUN` (default 20) calls per server process.
+    - Tests: `src/mcp/server.test.ts` (4, in-memory transport). Smoke: `npx tsx scripts/mcp-smoke.mts --read` spawned the server over stdio; on Fort Payne it returned 4 years, 8 sheets, 9 tiles, and the nearest tile read gave AUTO REP plus 3 tank marks.
   - [ ] 7.4 Write a Playwright smoke test: a showcase address loads in under 3 s, shows at least one pin, and its popup opens. _Req 7.1_
   - [~] 7.5 Deploy work, code side done 2026-11-22:
     - `UpstashStore` is a REST pipeline client. `sharedStore` uses Upstash when it is configured, uses memory locally, and **refuses to run on Vercel** without a shared store.
@@ -163,7 +171,9 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
       - Smoke-tested the bundled server on loopback: health, geocode with CORS, sheets, and read (`plan` then `paused` with the budget at 0).
     - The Upstash database was created by Nidhi.
     - Kept as an alternative: the Vercel prebuilt path.
-    - Known limit: the per-IP cap trusts the first `X-Forwarded-For` entry. If Render passes a client-supplied value through, the per-IP cap can be bypassed. The global daily budget still caps cost. Check this after deploy.
+    - **Live on 2026-11-22** at https://ghost-lot.onrender.com (API: https://ghost-lot-api.onrender.com). The first Upstash token pasted was the read-only one (NOPERM on INCRBY); replaced with the standard token.
+    - External checks after the fix: Fort Payne at 100 m read 9 of 9 tiles live (8, then `more`, then resumed from cache to `done`); the rate limit returned 429 from the 31st request in a minute.
+    - **Found by the spoof test:** a fake `X-Forwarded-For` got past the rate limit, because Render sits behind Cloudflare and keeps the client's value first. `clientKey` now prefers `cf-connecting-ip`, which Cloudflare overwrites. Re-run the spoof test after the next deploy.
 
     Original task: Deploy to Vercel. Before the repo goes public, rotate the Groq key and set it as a server environment variable. _Req 8.1_
 

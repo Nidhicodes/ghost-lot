@@ -1,0 +1,13 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Vision eval on prompt change",
+      "description": "Editing the shared vision prompts re-runs the 20-crop pipeline eval (about 40 model calls, 3-5 minutes). It fails if class recall drops below 0.80 or any hazard-free crop gets a finding.",
+      "trigger": "PostFileSave",
+      "matcher": "src/server/prompts/.*\\.json$",
+      "action": { "type": "command", "command": "sh eval/gate.sh" },
+      "timeout": 900
+    }
+  ]
+}

@@ -4,8 +4,10 @@ Pass 1 (general) runs on every crop in crops/half/. Pass 2 (tanks) runs on every
 false positives can be measured; the pipeline only *uses* pass 2 where pass 1 flagged AUTO/FUEL
 (or read GARAGE / FILLING / OIL). A crop's final classes = pass-1 classes, plus FUEL if a used
 pass 2 counted >= 1 tank. Writes crops/half/pipeline_results.json and prints the scores.
+With EVAL_GATE=1 it exits non-zero when final recall < 0.80 or any hazard-free crop gets a
+finding (the Kiro hook in .kiro/hooks/prompt-eval.json).
 """
-import json, re, time
+import hashlib, json, os, re, sys, time
 
 ns = {}
 exec(open("vision_eval.py").read().split("\ng = gold()")[0], ns)  # PROMPT, ask, parse, gold, CLASSES
@@ -30,7 +32,10 @@ g = gold()
 # half-resolution regions are larger than the labelled crops; see "Half-resolution regions" in labels.md
 g["c13"] = {"RAIL"}
 general_prompt = ns["PROMPT"]
-MODEL_TAG = re.sub(r"[^A-Za-z0-9.-]+", "_", ns["MODEL"]) + ".p" + str(json.load(open("../src/server/prompts/prompts.json"))["version"])
+PROMPTS_RAW = open("../src/server/prompts/prompts.json", "rb").read()
+# the content hash makes an edited prompt re-run even when its version number was not bumped
+MODEL_TAG = (re.sub(r"[^A-Za-z0-9.-]+", "_", ns["MODEL"]) + ".p" + str(json.loads(PROMPTS_RAW)["version"])
+             + "." + hashlib.sha256(PROMPTS_RAW).hexdigest()[:8])
 PARTIAL = f"crops/half/pipeline_partial.{MODEL_TAG}.jsonl"  # one line per finished crop, so a killed run resumes
 rows = {}
 try:
@@ -73,3 +78,11 @@ print("pass-2 tank counts on NONE crops:", {c: rows[c]["pass2_tanks"] for c in n
 print("pass-2 used on:", [c for c, r in rows.items() if r["pass2_used"]])
 print("model:", ns["MODEL"], "at", ns["BASE_URL"])
 json.dump(rows, open(f"crops/half/pipeline_results.{MODEL_TAG}.json", "w"), indent=1)
+
+if os.environ.get("EVAL_GATE") == "1":
+    tp, fp, fn = score("final")
+    alarms = [c for c in none_crops if rows[c]["final"]]
+    recall = tp / (tp + fn) if tp + fn else 0.0
+    if recall < 0.80 or alarms:
+        sys.exit(f"EVAL GATE FAILED: recall {recall:.2f} (need >= 0.80), false alarms on {alarms or 'none'}")
+    print(f"EVAL GATE PASSED: recall {recall:.2f}, no false alarms")
