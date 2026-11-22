@@ -1,0 +1,30 @@
+# Ghost Lot
+
+**What used to haunt your address?**
+
+Type a US address. Ghost Lot lays the Library of Congress Sanborn fire-insurance maps (1867–1930) over today's streets and reads them with a vision model. It flags old gasoline tanks, filling stations, garages, industry and rail lines on or near your block.
+
+Ghost Lot shows historical leads, not findings. Only an environmental assessment or testing can show whether a site is contaminated.
+
+Built for [Kiroween 2026](https://kiroween.devpost.com/) (Frankenstein category).
+
+> Status: early setup. See `.kiro/specs/ghost-lot/` for the requirements, design and task plan.
+
+## Run locally
+
+```sh
+npm install
+cp .env.example .env   # add your GROQ_API_KEY; never commit .env
+npm run dev            # http://localhost:5173
+npm test
+```
+
+## Data and credits
+
+- Sheet images: Library of Congress, [Sanborn Maps Collection](https://www.loc.gov/collections/sanborn-maps/).
+- Georeferencing: [mapsnap](https://mapsnap.org/), annotations under the ODbL. © OpenStreetMap contributors.
+- Map rendering: [Allmaps](https://allmaps.org/) and [MapLibre](https://maplibre.org/).
+
+## Licence
+
+Code: MIT (see `LICENSE`). Data derived from mapsnap stays under the ODbL.

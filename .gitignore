@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.vercel/
+coverage/
+*.log
+.DS_Store
+
+# Secrets: never commit. Copy .env.example to .env instead.
+.env
+.env.*
+!.env.example
+
+# Built sheet index (regenerate with scripts/build-index)
+index/
+data/raw/
+
+# Do NOT ignore .kiro/ — the hackathon requires it in the repo.

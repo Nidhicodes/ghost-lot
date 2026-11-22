@@ -1,0 +1,23 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #14121a;
+  color: #ece6d6;
+}
+
+body {
+  margin: 0;
+}
+
+.landing {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.note {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}

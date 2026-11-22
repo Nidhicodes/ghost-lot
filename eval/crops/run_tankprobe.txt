@@ -1,0 +1,5 @@
+crops/full/c03_t00.jpg | truth: has G.T. | model: ```json {"gasoline_tank_marks": 1, "where": "Top edge, between street numbers 330 and 331"} ```
+crops/full/c04_t00.jpg | truth: has G.T. x2 | model: ```json {"gasoline_tank_marks": 2, "where": "On the sidewalk edge to the right of the garages, between the 25' and 27' dimension markers."} ```
+crops/c14.jpg | truth: has GTS. (control, found before) | model: ```json {"gasoline_tank_marks": 2, "where": "On the sidewalk in front of the gas filling station, near the top center of the image"} ```
+crops/c02.jpg | truth: no tank (negative control) | model: ```json {"gasoline_tank_marks": 0, "where": "none found"} ```
+crops/c13.jpg | truth: no tank (negative control) | model: ```json {"gasoline_tank_marks": 0, "where": "none found"} ```

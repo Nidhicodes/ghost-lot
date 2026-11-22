@@ -1,0 +1,12 @@
+('c10', ['FUEL', 'RAIL'], ['FUEL', 'RAIL'], ['GULF REFINING Co.', 'STANDARD OIL Co', 'A. G. S. R. R.'])
+('c11', ['AUTO', 'FUEL', 'INDUSTRIAL', 'RAIL'], ['AUTO', 'FUEL', 'INDUSTRIAL', 'RAIL'], ['ISBELL CANNING CO. HEAT. STOVE POWDER STOVES FUEL. COAL LIGHTS ELEC.', 'GASOLINE FILLING STA.', 'VULCANIZING', 'GARAGE CAR SCRAP HEAT STOVES LIGHTS. ELEC. NO POWER', 'G S R R'])
+('c12', [], [], [])
+('c13', [], [], [])
+('c14', ['AUTO', 'FUEL', 'RAIL'], ['AUTO', 'FUEL', 'RAIL'], ['GTS', 'GASOL FILLING STATION', 'GARAGE CRCPY 50 CARS. HEAT: STOVES- LIGHTS: ELEC', 'VULCANIZING', 'A G S. R. R.'])
+('c15', ['RAIL'], ['RAIL'], ['A G S R R.'])
+('c16', [], [], [])
+('c17', [], [], [])
+('c18', [], [], [])
+('c19', [], [], [])
+
+MODEL qwen/qwen3.8-27b  class-level TP=10 FP=0 FN=0  precision=1.00 recall=1.00
