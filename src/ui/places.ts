@@ -1,5 +1,7 @@
 import type { Finding } from '../server/findings'
 import fortPayne from '../content/showcases/fort-payne-1927.json'
+import pittsburgh from '../content/showcases/pittsburgh-strip-1905.json'
+import seattle from '../content/showcases/seattle-gas-works-1919.json'
 
 export interface Showcase {
   id: string
@@ -24,6 +26,6 @@ export interface Place {
   showcase?: Showcase
 }
 
-export const SHOWCASES: Showcase[] = [fortPayne as unknown as Showcase]
+export const SHOWCASES: Showcase[] = [seattle, pittsburgh, fortPayne] as unknown as Showcase[]
 
 export const showcasePlace = (s: Showcase): Place => ({ matched: s.matched, lon: s.lon, lat: s.lat, radiusM: s.radiusM, showcase: s })

@@ -1,0 +1,447 @@
+{
+ "id": "seattle-gas-works-1919",
+ "title": "Gas Works Park, Seattle",
+ "address": "Gas Works Park (park centre), Seattle, WA",
+ "matched": "Gas Works Park (park centre), Seattle, WA",
+ "lon": -122.33455,
+ "lat": 47.645688,
+ "radiusM": 100,
+ "year": 1919,
+ "years": [
+  1919
+ ],
+ "readOn": "2026-11-21",
+ "model": "gemini-3.5-flash-lite",
+ "promptVersion": 2,
+ "total": 8,
+ "read": 8,
+ "unread": 0,
+ "sheets": [
+  {
+   "item": "sanborn09315_015",
+   "idx": 106,
+   "year": 1919,
+   "annotationUrl": "https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn09315_015.main.iiif.json"
+  }
+ ],
+ "findings": [
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "RETORTS",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    3550,
+    5016.666666666667
+   ],
+   "lonLat": [
+    -122.33402951207043,
+    47.64574763775444
+   ],
+   "distanceM": 40
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2#1",
+   "class": "INDUSTRIAL",
+   "mapText": "ENGINE R'M & GAS PL",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    4383.333333333334,
+    5016.666666666667
+   ],
+   "lonLat": [
+    -122.33344069889363,
+    47.645745564199636
+   ],
+   "distanceM": 83
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2#2",
+   "class": "INDUSTRIAL",
+   "mapText": "MACHINE SHOP",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    4383.333333333334,
+    5016.666666666667
+   ],
+   "lonLat": [
+    -122.33344069889363,
+    47.645745564199636
+   ],
+   "distanceM": 83
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2#3",
+   "class": "INDUSTRIAL",
+   "mapText": "PURIFIER HO.",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    4383.333333333334,
+    6683.333333333334
+   ],
+   "lonLat": [
+    -122.33344685450035,
+    47.644952176482974
+   ],
+   "distanceM": 116
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2#4",
+   "class": "INDUSTRIAL",
+   "mapText": "COKE OVENS",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    2716.6666666666665,
+    6683.333333333334
+   ],
+   "lonLat": [
+    -122.3346244808539,
+    47.644956323655485
+   ],
+   "distanceM": 82
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2#0",
+   "class": "RAIL",
+   "mapText": "R. R. SPUR",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    5016.666666666667
+   ],
+   "lonLat": [
+    -122.33565463643835,
+    47.64575336076527
+   ],
+   "distanceM": 83
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2#1",
+   "class": "INDUSTRIAL",
+   "mapText": "PIPE DIPPING VAT",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    2083.3333333333335,
+    5016.666666666667
+   ],
+   "lonLat": [
+    -122.33506582326157,
+    47.64575128721069
+   ],
+   "distanceM": 39
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2#2",
+   "class": "FUEL",
+   "mapText": "OIL TANK IN GRD",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    5850
+   ],
+   "lonLat": [
+    -122.33565771424169,
+    47.64535666847247
+   ],
+   "distanceM": 91
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2#3",
+   "class": "INDUSTRIAL",
+   "mapText": "STEEL GAS RELIEF HOLDER",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    5850
+   ],
+   "lonLat": [
+    -122.33565771424169,
+    47.64535666847247
+   ],
+   "distanceM": 91
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2#4",
+   "class": "INDUSTRIAL",
+   "mapText": "STEEL GAS STORAGE HOLDER",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    2083.3333333333335,
+    6683.333333333334
+   ],
+   "lonLat": [
+    -122.33507197886827,
+    47.64495789958096
+   ],
+   "distanceM": 90
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2#5",
+   "class": "INDUSTRIAL",
+   "mapText": "STEEL CONDENSERS",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    2083.3333333333335,
+    6683.333333333334
+   ],
+   "lonLat": [
+    -122.33507197886827,
+    47.64495789958096
+   ],
+   "distanceM": 90
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2#6",
+   "class": "INDUSTRIAL",
+   "mapText": "CITY OF SEATTLE REFUSE DESTRUCTOR No 2",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    416.6666666666667,
+    6683.333333333334
+   ],
+   "lonLat": [
+    -122.33624960522185,
+    47.644962046753015
+   ],
+   "distanceM": 151
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2#0",
+   "class": "RAIL",
+   "mapText": "N. P. R'Y (BOTHELL BRANCH)",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    3550,
+    2716.6666666666665
+   ],
+   "lonLat": [
+    -122.33402101733316,
+    47.646842492970535
+   ],
+   "distanceM": 134
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2#1",
+   "class": "FUEL",
+   "mapText": "STEEL OIL TANKS ON GR'D",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    4383.333333333334,
+    2716.6666666666665
+   ],
+   "lonLat": [
+    -122.33343220415638,
+    47.6468404194592
+   ],
+   "distanceM": 153
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2#2",
+   "class": "RAIL",
+   "mapText": "R. R. SPUR",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    3550,
+    3550
+   ],
+   "lonLat": [
+    -122.3340240951365,
+    47.64644580894917
+   ],
+   "distanceM": 93
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2#3",
+   "class": "INDUSTRIAL",
+   "mapText": "RETORTS",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    2716.6666666666665,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -122.33461598611666,
+    47.6460511954579
+   ],
+   "distanceM": 41
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2#4",
+   "class": "INDUSTRIAL",
+   "mapText": "GENERATING",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    3550,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -122.33402717293986,
+    47.64604912191515
+   ],
+   "distanceM": 56
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2#5",
+   "class": "INDUSTRIAL",
+   "mapText": "BOILER HO.",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:2300:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/2300,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    4383.333333333334,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -122.33343835976308,
+    47.64604704837231
+   ],
+   "distanceM": 92
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:2300:2500:2500:s2#0",
+   "class": "RAIL",
+   "mapText": "N. P. R'Y RIGHT OF WAY",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/0,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    3550
+   ],
+   "lonLat": [
+    -122.33564921950445,
+    47.64645153188351
+   ],
+   "distanceM": 118
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2#0",
+   "class": "FUEL",
+   "mapText": "GAS PUMPS 1ST",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/4600,4600,2100,2500/1050,/0/default.jpg",
+   "px": [
+    4950,
+    5016.666666666667
+   ],
+   "lonLat": [
+    -122.33304030593344,
+    47.64574415418233
+   ],
+   "distanceM": 113
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2#1",
+   "class": "INDUSTRIAL",
+   "mapText": "GAS MFG",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/4600,4600,2100,2500/1050,/0/default.jpg",
+   "px": [
+    4950,
+    5850
+   ],
+   "lonLat": [
+    -122.33304338373677,
+    47.64534746181961
+   ],
+   "distanceM": 119
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:2300:2100:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "BL. SM.",
+   "pass": 1,
+   "year": 1919,
+   "item": "sanborn09315_015",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:2300:2100:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/4600,2300,2100,2500/1050,/0/default.jpg",
+   "px": [
+    4950,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -122.33303796680288,
+    47.64604563836314
+   ],
+   "distanceM": 120
+  }
+ ]
+}

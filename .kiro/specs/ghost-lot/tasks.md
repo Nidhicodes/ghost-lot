@@ -132,7 +132,14 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 ## Day 10–11 (Dec 1–2): demo hardening
 
 - [ ] 7. Showcase and Kiro Crew precompute
-  - [ ] 7.1 Pick the 3 showcase addresses: Fort Payne, AL 1927 plus 2 well-known cities. Confirm that each has hazards within 150 m. _Req 7.1_
+  - [x] 7.1 / 7.2 (simple version) Showcases precomputed on 2026-11-22 with `scripts/precompute-showcase.ts` (Gemini 3.5 Flash-Lite, prompts v2, 100 m radius). All tiles were read, with 0 unread:
+    - **Gas Works Park, Seattle (1919).** The circle is centred on the plant inside the park, not on the geocoded entrance about 250 m away. 8 tiles, 11 calls, 22 findings, including "RETORTS", "STEEL GAS STORAGE HOLDER", "COKE OVENS", "OIL TANK IN GRD" and "CITY OF SEATTLE REFUSE DESTRUCTOR". The agent checked these labels against the full sheet image.
+    - **Strip District, Pittsburgh (1905).** 2100 Smallman St. 10 tiles, 10 calls, 24 findings: Penn R.R. produce yard, a machine shop with a gas engine, a foundry, "FRANKLIN ZINC & MFG. CO.", and a fire-brick plant.
+    - **Fort Payne, AL (1927).** Read earlier: 9 tiles, 10 findings.
+    - Not yet done: the Kiro Crew skeptic pass (7.2), and an image check of every finding.
+    - Some findings lie beyond the 100 m circle, at up to about 200 m, because tiles extend past the circle. The risk card puts them under "Within the wider search area".
+
+    Original task: Pick the 3 showcase addresses: Fort Payne, AL 1927 plus 2 well-known cities. Confirm that each has hazards within 150 m. _Req 7.1_
   - [ ] 7.2 Run a Kiro Crew precompute with three roles: a planner, parallel readers, and a skeptic that re-reads each finding against its image. Commit the results JSON and log the skeptic's disagreements. _Req 7.1_
   - [ ] 7.3 Build the local `ghost-lot` MCP server with `find_sheets` and `read_tile`, and use it while debugging. _Design: Kiro usage plan_
   - [ ] 7.4 Write a Playwright smoke test: a showcase address loads in under 3 s, shows at least one pin, and its popup opens. _Req 7.1_

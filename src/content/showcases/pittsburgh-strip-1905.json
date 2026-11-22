@@ -1,0 +1,505 @@
+{
+ "id": "pittsburgh-strip-1905",
+ "title": "Strip District, Pittsburgh",
+ "address": "2100 Smallman St, Pittsburgh, PA",
+ "matched": "2100 SMALLMAN ST, PITTSBURGH, PA, 15222",
+ "lon": -79.983854300022,
+ "lat": 40.452387033769,
+ "radiusM": 100,
+ "year": 1905,
+ "years": [
+  1884,
+  1893,
+  1905
+ ],
+ "readOn": "2026-11-21",
+ "model": "gemini-3.5-flash-lite",
+ "promptVersion": 2,
+ "total": 10,
+ "read": 10,
+ "unread": 0,
+ "sheets": [
+  {
+   "item": "sanborn07911_007",
+   "idx": 1,
+   "year": 1905,
+   "annotationUrl": "https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn07911_007.main.iiif.json"
+  },
+  {
+   "item": "sanborn07911_007",
+   "idx": 2,
+   "year": 1905,
+   "annotationUrl": "https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn07911_007.main.iiif.json"
+  },
+  {
+   "item": "sanborn07911_007",
+   "idx": 9,
+   "year": 1905,
+   "annotationUrl": "https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn07911_007.main.iiif.json"
+  },
+  {
+   "item": "sanborn07911_007",
+   "idx": 10,
+   "year": 1905,
+   "annotationUrl": "https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn07911_007.main.iiif.json"
+  }
+ ],
+ "findings": [
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:4600:2500:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "MACHINE SHOP",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/2300,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    4383.333333333334,
+    5850
+   ],
+   "lonLat": [
+    -79.9837114921482,
+    40.45212873447003
+   ],
+   "distanceM": 31
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:4600:2500:2500:s2#1",
+   "class": "INDUSTRIAL",
+   "mapText": "GAS ENG.",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/2300,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    4383.333333333334,
+    5850
+   ],
+   "lonLat": [
+    -79.9837114921482,
+    40.45212873447003
+   ],
+   "distanceM": 31
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:4600:2060:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "PRINTING",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:4600:2060:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/4600,4600,2060,2500/1030,/0/default.jpg",
+   "px": [
+    5630,
+    5850
+   ],
+   "lonLat": [
+    -79.98316721333632,
+    40.452510233301574
+   ],
+   "distanceM": 60
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "PUMPING STATION",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/2300,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    2716.6666666666665,
+    2716.6666666666665
+   ],
+   "lonLat": [
+    -79.98569921011719,
+    40.452659662875426
+   ],
+   "distanceM": 159
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2#1",
+   "class": "RAIL",
+   "mapText": "RAILROAD",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/2300,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    3550,
+    2716.6666666666665
+   ],
+   "lonLat": [
+    -79.98533538738198,
+    40.45291467368852
+   ],
+   "distanceM": 138
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2#2",
+   "class": "RAIL",
+   "mapText": "PENN. R. R. FRUIT DEPOT",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/2300,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    2716.6666666666665,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -79.98502895878816,
+    40.45210596436982
+   ],
+   "distanceM": 104
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:2300:2060:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "FORGE SHOP",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:2300:2060:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/4600,2300,2060,2500/1030,/0/default.jpg",
+   "px": [
+    5630,
+    2716.6666666666665
+   ],
+   "lonLat": [
+    -79.98442728583488,
+    40.45355117645562
+   ],
+   "distanceM": 138
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:2300:2060:2500:s2#1",
+   "class": "INDUSTRIAL",
+   "mapText": "MACHINE SHOP",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:2300:2060:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/4600,2300,2060,2500/1030,/0/default.jpg",
+   "px": [
+    5630,
+    2716.6666666666665
+   ],
+   "lonLat": [
+    -79.98442728583488,
+    40.45355117645562
+   ],
+   "distanceM": 138
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:2300:2060:2500:s2#2",
+   "class": "RAIL",
+   "mapText": "PENN. R.R. PRODUCE YARD.",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:2300:2060:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/4600,2300,2060,2500/1030,/0/default.jpg",
+   "px": [
+    4943.333333333333,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -79.98405682443968,
+    40.45278735671518
+   ],
+   "distanceM": 48
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "CLAY MILL",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    5016.666666666667
+   ],
+   "lonLat": [
+    -79.98290406096652,
+    40.45319584049703
+   ],
+   "distanceM": 121
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#1",
+   "class": "INDUSTRIAL",
+   "mapText": "FOUNDRY",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    5850
+   ],
+   "lonLat": [
+    -79.98257319912119,
+    40.452917231992345
+   ],
+   "distanceM": 123
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#2",
+   "class": "INDUSTRIAL",
+   "mapText": "GAS ENG.",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    5850
+   ],
+   "lonLat": [
+    -79.98257319912119,
+    40.452917231992345
+   ],
+   "distanceM": 123
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#3",
+   "class": "INDUSTRIAL",
+   "mapText": "CENTRAL FOUNDRY JAMES LATHWOOD OWNER.",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    5850
+   ],
+   "lonLat": [
+    -79.98257319912119,
+    40.452917231992345
+   ],
+   "distanceM": 123
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#4",
+   "class": "INDUSTRIAL",
+   "mapText": "FRANKLIN ZINC & MFG. CO. BATTERY ZINC MFG",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    416.6666666666667,
+    5850
+   ],
+   "lonLat": [
+    -79.98293933745637,
+    40.452665465709174
+   ],
+   "distanceM": 83
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#5",
+   "class": "INDUSTRIAL",
+   "mapText": "BLSM.",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    416.6666666666667,
+    5850
+   ],
+   "lonLat": [
+    -79.98293933745637,
+    40.452665465709174
+   ],
+   "distanceM": 83
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#6",
+   "class": "INDUSTRIAL",
+   "mapText": "HAMILTON & LINDENFELSER WIRE WORKS",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,4600,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    5850
+   ],
+   "lonLat": [
+    -79.98257319912119,
+    40.452917231992345
+   ],
+   "distanceM": 123
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:2300:2500:2500:s2#0",
+   "class": "RAIL",
+   "mapText": "B. & O. R. R. YARD",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    2716.6666666666665
+   ],
+   "lonLat": [
+    -79.98381723965963,
+    40.45396479397603
+   ],
+   "distanceM": 175
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:2300:2500:2500:s2#1",
+   "class": "INDUSTRIAL",
+   "mapText": "HARBISON & WALKER FIRE BRICK PLANT",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    3550
+   ],
+   "lonLat": [
+    -79.98348637781429,
+    40.4536861886596
+   ],
+   "distanceM": 148
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:2300:2500:2500:s2#2",
+   "class": "INDUSTRIAL",
+   "mapText": "CLAY MILL",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012/0,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -79.98315551596897,
+    40.453407582188014
+   ],
+   "distanceM": 128
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "GAS ENG.",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019/4600,0,2060,2500/1030,/0/default.jpg",
+   "px": [
+    4943.333333333333,
+    2083.3333333333335
+   ],
+   "lonLat": [
+    -79.98316224394051,
+    40.450601475095525
+   ],
+   "distanceM": 207
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#1",
+   "class": "INDUSTRIAL",
+   "mapText": "MACHINE SHOP",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019/4600,0,2060,2500/1030,/0/default.jpg",
+   "px": [
+    4943.333333333333,
+    2083.3333333333335
+   ],
+   "lonLat": [
+    -79.98316224394051,
+    40.450601475095525
+   ],
+   "distanceM": 207
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#2",
+   "class": "INDUSTRIAL",
+   "mapText": "FURNACE",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019/4600,0,2060,2500/1030,/0/default.jpg",
+   "px": [
+    5630,
+    2083.3333333333335
+   ],
+   "lonLat": [
+    -79.98285382828766,
+    40.45081043592788
+   ],
+   "distanceM": 195
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#3",
+   "class": "INDUSTRIAL",
+   "mapText": "SPRING MILL N°1",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019/4600,0,2060,2500/1030,/0/default.jpg",
+   "px": [
+    5630,
+    2083.3333333333335
+   ],
+   "lonLat": [
+    -79.98285382828766,
+    40.45081043592788
+   ],
+   "distanceM": 195
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#4",
+   "class": "INDUSTRIAL",
+   "mapText": "BRICK FLOOR FURNACES",
+   "pass": 1,
+   "year": 1905,
+   "item": "sanborn07911_007",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019/4600,0,2060,2500/1030,/0/default.jpg",
+   "px": [
+    5630,
+    2083.3333333333335
+   ],
+   "lonLat": [
+    -79.98285382828766,
+    40.45081043592788
+   ],
+   "distanceM": 195
+  }
+ ]
+}
