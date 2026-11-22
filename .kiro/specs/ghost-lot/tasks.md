@@ -144,7 +144,15 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     - Some findings lie beyond the 100 m circle, at up to about 200 m, because tiles extend past the circle. The risk card puts them under "Within the wider search area".
 
     Original task: Pick the 3 showcase addresses: Fort Payne, AL 1927 plus 2 well-known cities. Confirm that each has hazards within 150 m. _Req 7.1_
-  - [ ] 7.2 Run a Kiro Crew precompute with three roles: a planner, parallel readers, and a skeptic that re-reads each finding against its image. Commit the results JSON and log the skeptic's disagreements. _Req 7.1_
+  - [x] 7.2 Kiro Crew skeptic pass (done 2026-11-22). _Req 7.1_
+    - `scripts/skeptic-prep.py` downloads each showcase tile and a native-resolution close-up of the cell where each finding was placed. Three Kiro Crew subagents, one per showcase, then checked all 56 findings against the images in parallel. They were given no context from the build session.
+    - Verdicts: 49 confirmed, 2 not found, 5 wrong class. Logs are in `eval/skeptic/<showcase>.verdicts.json`.
+    - A person reviewed every disagreement against the close-ups, then recorded the decisions in `eval/skeptic/decisions.json`. `scripts/skeptic-apply.py` applies them, and `src/content/skeptic.test.ts` keeps them applied.
+      - Dropped 5: two Fort Payne pass-2 tank marks that are not on the map, a Pittsburgh water pumping station, Seattle's "GAS PUMPS 1ST" (the gas works' own engine-room pumps, already shown from the next tile), and Seattle's "GAS MFG", which is a fire-protection note rather than a building.
+      - Corrected 1: "FORMERLY R. SM." to "FORMERLY BL.SM." (blacksmith).
+      - Kept 2: the Seattle gas holders. The skeptic wanted FUEL, but that rule came from its brief, not from the app's prompt.
+    - Result: 56 findings became 51.
+    - **Found:** pass 2 can report tank marks that are not there. The 20-crop eval missed this because its hazard-free crops have no auto tiles to trigger pass 2. Open: add such a crop to the eval (5.5) before changing the pass-2 prompt.
   - [x] 7.3 Local `ghost-lot` MCP server (done 2026-11-22). _Design: Kiro usage plan_
     - Code: `src/mcp/server.ts` (tools) and `scripts/mcp-server.ts` (stdio entry, reads `.env`). Registered in `.kiro/settings/mcp.json`; `find_sheets` is auto-approved, `read_tile` asks first because it spends model quota.
     - `find_sheets(lat, lon, radius_m)`: years, sheets and the nearest-first reading plan with tile URLs. No model calls.

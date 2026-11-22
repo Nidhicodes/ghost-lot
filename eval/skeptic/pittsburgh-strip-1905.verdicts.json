@@ -1,0 +1,147 @@
+[
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:4600:2500:2500:s2#0",
+  "verdict": "CONFIRMED",
+  "seen": "MACHINE SHOP",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:4600:2500:2500:s2#1",
+  "verdict": "CONFIRMED",
+  "seen": "GAS ENG.",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:4600:2060:2500:s2#0",
+  "verdict": "CONFIRMED",
+  "seen": "PRINTING",
+  "note": "Printing with electric motor; light manufacturing."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2#0",
+  "verdict": "WRONG_CLASS",
+  "suggestedClass": "NONE",
+  "seen": "PENN.R.R. PUMPING STATION / PUMP HO. / 30000 GAL. W. TANK",
+  "note": "Water pump house with water tank, not a listed hazard."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2#1",
+  "verdict": "CONFIRMED",
+  "seen": "RAILROAD (street name) with parallel tracks",
+  "note": "Label is a street name, but a track bundle is drawn along it."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2#2",
+  "verdict": "CONFIRMED",
+  "seen": "PENN. R.R. (cut off); tracks and YARD",
+  "note": "Tracks and PENN. R.R. building present; 'FRUIT DEPOT' only partly legible."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:2300:2060:2500:s2#0",
+  "verdict": "CONFIRMED",
+  "seen": "FORGE SHOP 1ST",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:2300:2060:2500:s2#1",
+  "verdict": "CONFIRMED",
+  "seen": "MACHINE SHOP 2D",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:4600:2300:2060:2500:s2#2",
+  "verdict": "CONFIRMED",
+  "seen": "PENN. R.R. PRODUCE YARD.",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#0",
+  "verdict": "CONFIRMED",
+  "seen": "CLAY MILL",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#1",
+  "verdict": "CONFIRMED",
+  "seen": "FOUNDRY",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#2",
+  "verdict": "CONFIRMED",
+  "seen": "GAS ENG.",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#3",
+  "verdict": "CONFIRMED",
+  "seen": "CENTRAL FOUNDRY JAMES LATHWOOD OWNER.",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#4",
+  "verdict": "CONFIRMED",
+  "seen": "FRANKLIN ZINC & MFG. CO. BATTERY ZINC MFG",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#5",
+  "verdict": "CONFIRMED",
+  "seen": "BLKSM.",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:4600:2500:2500:s2#6",
+  "verdict": "CONFIRMED",
+  "seen": "HAMILTON & LINDENFELSER WIRE WORKS",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:2300:2500:2500:s2#0",
+  "verdict": "CONFIRMED",
+  "seen": "B. & O. R. R. YARD",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:2300:2500:2500:s2#1",
+  "verdict": "CONFIRMED",
+  "seen": "HARBISON & WALKER FIRE-BRICK PLA(NT)",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0012:0:2300:2500:2500:s2#2",
+  "verdict": "CONFIRMED",
+  "seen": "CLAY MILL",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#0",
+  "verdict": "CONFIRMED",
+  "seen": "GAS ENG.",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#1",
+  "verdict": "CONFIRMED",
+  "seen": "MACHINE SHOP",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#2",
+  "verdict": "CONFIRMED",
+  "seen": "FURNACE",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#3",
+  "verdict": "CONFIRMED",
+  "seen": "SPRING MILL N\u00ba1",
+  "note": "Text visible on map; class fits."
+ },
+ {
+  "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#4",
+  "verdict": "CONFIRMED",
+  "seen": "BRICK FLOOR FURNACES",
+  "note": "Text visible on map; class fits."
+ }
+]

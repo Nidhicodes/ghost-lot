@@ -387,44 +387,6 @@
    "distanceM": 118
   },
   {
-   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2#0",
-   "class": "FUEL",
-   "mapText": "GAS PUMPS 1ST",
-   "pass": 1,
-   "year": 1919,
-   "item": "sanborn09315_015",
-   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2",
-   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/4600,4600,2100,2500/1050,/0/default.jpg",
-   "px": [
-    4950,
-    5016.666666666667
-   ],
-   "lonLat": [
-    -122.33304030593344,
-    47.64574415418233
-   ],
-   "distanceM": 113
-  },
-  {
-   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2#1",
-   "class": "INDUSTRIAL",
-   "mapText": "GAS MFG",
-   "pass": 1,
-   "year": 1919,
-   "item": "sanborn09315_015",
-   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2",
-   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G/4600,4600,2100,2500/1050,/0/default.jpg",
-   "px": [
-    4950,
-    5850
-   ],
-   "lonLat": [
-    -122.33304338373677,
-    47.64534746181961
-   ],
-   "distanceM": 119
-  },
-  {
    "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:2300:2100:2500:s2#0",
    "class": "INDUSTRIAL",
    "mapText": "BL. SM.",
@@ -443,5 +405,11 @@
    ],
    "distanceM": 120
   }
- ]
+ ],
+ "skeptic": {
+  "checked": 22,
+  "dropped": 2,
+  "corrected": 0,
+  "log": "eval/skeptic/seattle-gas-works-1919.verdicts.json"
+ }
 }

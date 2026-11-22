@@ -66,44 +66,6 @@
    "distanceM": 145
   },
   {
-   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2#1",
-   "class": "FUEL",
-   "mapText": "gasoline tank mark (G.T.)",
-   "pass": 2,
-   "year": 1927,
-   "item": "sanborn00045_004",
-   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2",
-   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011/4600,2300,1852,2500/926,/0/default.jpg",
-   "px": [
-    5526,
-    2716.6666666666665
-   ],
-   "lonLat": [
-    -85.7237648986004,
-    34.441376438688195
-   ],
-   "distanceM": 110
-  },
-  {
-   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2#2",
-   "class": "FUEL",
-   "mapText": "gasoline tank mark (G.T.)",
-   "pass": 2,
-   "year": 1927,
-   "item": "sanborn00045_004",
-   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2",
-   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011/4600,2300,1852,2500/926,/0/default.jpg",
-   "px": [
-    5526,
-    4383.333333333334
-   ],
-   "lonLat": [
-    -85.72230441795709,
-    34.44045733119852
-   ],
-   "distanceM": 79
-  },
-  {
    "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003:4600:2300:1852:2500:s2#0",
    "class": "FUEL",
    "mapText": "G.T.",
@@ -182,7 +144,7 @@
   {
    "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004:0:2300:2500:2500:s2#0",
    "class": "INDUSTRIAL",
-   "mapText": "FORMERLY R. SM.",
+   "mapText": "FORMERLY BL.SM.",
    "pass": 1,
    "year": 1927,
    "item": "sanborn00045_004",
@@ -236,5 +198,11 @@
    ],
    "distanceM": 125
   }
- ]
+ ],
+ "skeptic": {
+  "checked": 10,
+  "dropped": 2,
+  "corrected": 1,
+  "log": "eval/skeptic/fort-payne-1927.verdicts.json"
+ }
 }

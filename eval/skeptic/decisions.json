@@ -1,0 +1,26 @@
+{
+ "fort-payne-1927": {
+  "drop": {
+   "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2#1": "Skeptic NOT_FOUND, confirmed by hand: the top cell has dwellings, auto sheds and stove marks, no G.T.",
+   "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2#2": "Skeptic NOT_FOUND, confirmed by hand: block 66 has dwellings, a store and water pipes, no G.T."
+  },
+  "mapText": {
+   "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004:0:2300:2500:2500:s2#0": {"to": "FORMERLY BL.SM.", "why": "The map reads BL.SM. (blacksmith); the model read R. SM."}
+  }
+ },
+ "pittsburgh-strip-1905": {
+  "drop": {
+   "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2#0": "Skeptic WRONG_CLASS -> NONE, confirmed by hand: Penn. R.R. water pumping station with a 30,000 gal water tank."
+  }
+ },
+ "seattle-gas-works-1919": {
+  "drop": {
+   "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2#0": "Skeptic WRONG_CLASS (FUEL -> INDUSTRIAL): the label is ENGINE R'M & GAS PUMPS 1ST, the gas works' own pumps. Already shown as ENGINE R'M & GAS PL from the neighbouring tile.",
+   "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:4600:4600:2100:2500:s2#1": "Skeptic WRONG_CLASS -> NONE, confirmed by hand: the text is the plant's fire-protection note (FUEL: OIL FOR GAS M'F'G), not a building."
+  },
+  "kept": {
+   "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2#3": "Skeptic suggested FUEL for a gas holder. That rule came from the skeptic brief, not the app's prompt, where a gas plant is INDUSTRIAL. Kept.",
+   "https://tile.loc.gov/image-services/iiif/service:gmd:gmd428m:g4284m:g4284sm:g4284sm_g09315191906:09315_06_1919-0699G:0:4600:2500:2500:s2#4": "Same as the relief holder. Kept as INDUSTRIAL."
+  }
+ }
+}

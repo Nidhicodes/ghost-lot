@@ -103,25 +103,6 @@
    "distanceM": 60
   },
   {
-   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2#0",
-   "class": "INDUSTRIAL",
-   "mapText": "PUMPING STATION",
-   "pass": 1,
-   "year": 1905,
-   "item": "sanborn07911_007",
-   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2",
-   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011/2300,2300,2500,2500/1250,/0/default.jpg",
-   "px": [
-    2716.6666666666665,
-    2716.6666666666665
-   ],
-   "lonLat": [
-    -79.98569921011719,
-    40.452659662875426
-   ],
-   "distanceM": 159
-  },
-  {
    "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0011:2300:2300:2500:2500:s2#1",
    "class": "RAIL",
    "mapText": "RAILROAD",
@@ -466,7 +447,7 @@
   {
    "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd382m:g3824m:g3824pm:g3824pm_g07911190501:07911_01_1905-0019:4600:0:2060:2500:s2#3",
    "class": "INDUSTRIAL",
-   "mapText": "SPRING MILL N°1",
+   "mapText": "SPRING MILL N\u00b01",
    "pass": 1,
    "year": 1905,
    "item": "sanborn07911_007",
@@ -501,5 +482,11 @@
    ],
    "distanceM": 195
   }
- ]
+ ],
+ "skeptic": {
+  "checked": 24,
+  "dropped": 1,
+  "corrected": 0,
+  "log": "eval/skeptic/pittsburgh-strip-1905.verdicts.json"
+ }
 }
