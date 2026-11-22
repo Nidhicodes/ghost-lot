@@ -28,9 +28,20 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 ## Day 3–4 (Nov 24–25): data
 
 - [ ] 3. Sheet index
-  - [ ] 3.1 `scripts/build-index`: download the mapsnap v2.0 zip and `items.tsv`, keep only published sheets with a year of 1930 or earlier, and write one gzipped JSON per state plus a flatbush R-tree. _Req 1.3, 1.5_
-  - [ ] 3.2 Write `index/states.json` and add a nearest-covered-place lookup. _Req 1.4_
-  - [ ] 3.3 Unit test: an address in Fort Payne, AL returns `sanborn00045_004` sheets, and a point in the ocean returns none. _Req 1.3, 1.4_
+  - [x] 3.1 `npm run build-index` (done 2026-11-22). The build takes 39 s and produces:
+    - 27,332 volumes dated 1930 or earlier,
+    - 261,792 sheet images,
+    - 51 state files, 13 MB gzipped in total (NY is the largest at 1.1 MB),
+    - 0 parse errors and 0 unsupported transforms.
+
+    Design note: the index stores only `[item, idx, year, bbox]` plus a Flatbush tree. The lookup fetches the matching volume's annotation from `data.mapsnap.org` and clips it exactly, which keeps the index small. _Req 1.3, 1.5_
+  - [x] 3.2 Add `index/states.json` (per-state bbox, sheet count and file size), `index/places.json` (7,512 places) and `nearestPlace()`. _Req 1.4_
+  - [x] 3.3 Tests in `src/server/sheetIndex.test.ts`:
+    - fixture tests, plus a property test that a sheet within the radius is never missed;
+    - tests that run only when the built index exists: 100 Gault Ave N, Fort Payne returns `sanborn00045_004` (1927), and a point 30 km away returns nothing.
+
+    All 28 tests pass. _Req 1.3, 1.4_
+  - [ ] 3.4 Decide how `index/` reaches production (it is git-ignored). The options are to run `build-index` in the Vercel build (a 132 MB download per deploy) or to commit the 13 MB. Decide in task 7.5.
 - [ ] 4. Lookup API
   - [ ] 4.1 Implement `/api/geocode` (US Census), `/api/sheets` and the tile planner, with zod validation, a 400 m radius cap and an IP rate limit. _Req 1, 8.3_
   - [ ] 4.2 Write property-based tests for tile-planner coverage and overlap. _Req 3.3_

@@ -19,6 +19,15 @@ npm run dev            # http://localhost:5173
 npm test
 ```
 
+## Build the sheet index
+
+```sh
+mkdir -p data/raw
+curl -o data/raw/items.tsv https://data.mapsnap.org/runs/v2.0/items.tsv
+curl -o data/raw/mapsnap-v2.0-loc.zip https://data.mapsnap.org/runs/v2.0/mapsnap-v2.0-loc.zip   # 132 MB
+npm run build-index    # about 40 s; writes index/ (13 MB)
+```
+
 ## Data and credits
 
 - Sheet images: Library of Congress, [Sanborn Maps Collection](https://www.loc.gov/collections/sanborn-maps/).

@@ -50,6 +50,14 @@ Ghost Lot is a web app with a thin server. The browser renders today's map with 
 
 The index never stores images. Images always come from `tile.loc.gov` at request time.
 
+**Built index (task 3):**
+- The build produced 27,332 volumes, 261,792 sheets and 13 MB gzipped.
+- Each row holds only `[item, idx, year, bbox]`. The query fetches `data.mapsnap.org/runs/v2.0/iiif/loc/<item>.main.iiif.json` for the matching volumes and clips exactly.
+
+**House numbers changed since the maps were made.** "2425 Gault Av" on the 1927 Fort Payne map is about 1.3 km from today's "2425 Gault Ave N". The app must locate an address by its geocoded coordinates only. It must never match an address to the old map's printed house numbers.
+
+The Census geocoder also fuzzy-matches: it turned "300 Gault Ave N" into "300 GAULT AVE S". This is why Requirement 1.1 shows the matched address back to the user.
+
 ## Coordinate math (`src/geo/`)
 
 - **Pixel ↔ lon/lat:** use Allmaps' own `ProjectedGcpTransformer` (`@allmaps/project`) with `@allmaps/annotation`'s `parseAnnotation`, and do not write our own transform math. This was decided in task 2. The reasons:
