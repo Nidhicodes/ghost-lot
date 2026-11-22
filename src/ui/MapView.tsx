@@ -18,6 +18,8 @@ interface Props {
   findings: Finding[]
   selected: string | null
   onSelect(id: string | null): void
+  /** Shown to the user so a broken overlay is visible, not a silent black map. */
+  onProblem(message: string): void
 }
 
 /** Build the pin popup with text nodes only: model-read text is untrusted and never parsed as HTML. */
@@ -45,7 +47,7 @@ function popupContent(f: Finding): HTMLElement {
   return root
 }
 
-export function MapView({ centre, radiusM, annotationUrls, opacity, findings, selected, onSelect }: Props) {
+export function MapView({ centre, radiusM, annotationUrls, opacity, findings, selected, onSelect, onProblem }: Props) {
   const el = useRef<HTMLDivElement>(null)
   const map = useRef<MapLibreMap | null>(null)
   const layer = useRef<WarpedMapLayer | null>(null)
@@ -53,17 +55,28 @@ export function MapView({ centre, radiusM, annotationUrls, opacity, findings, se
   const ready = useRef<Promise<void> | null>(null)
 
   useEffect(() => {
-    const m = new MapLibreMap({ container: el.current!, style: BASEMAP, center: centre, zoom: 17, attributionControl: false })
+    // Allmaps does not support pitch, so it is disabled
+    const m = new MapLibreMap({ container: el.current!, style: BASEMAP, center: centre, zoom: 17, maxPitch: 0, attributionControl: false })
     m.addControl(new NavigationControl({ showCompass: false }), 'top-right')
     m.addControl(new AttributionControl({ compact: false, customAttribution: ATTRIBUTION }), 'bottom-right')
+    m.on('error', (e) => {
+      console.error('map error', e.error)
+      onProblem(`Map error: ${e.error?.message ?? 'unknown'}`)
+    })
     map.current = m
     ready.current = new Promise((resolve) =>
       m.on('load', () => {
-        const wl = new WarpedMapLayer()
-        m.addLayer(wl)
-        layer.current = wl
+        // the search circle goes first so it shows even if the historic overlay fails
         m.addSource('radius', { type: 'geojson', data: { type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [[]] } } })
         m.addLayer({ id: 'radius-line', type: 'line', source: 'radius', paint: { 'line-color': '#c9f2ff', 'line-width': 2, 'line-dasharray': [2, 2], 'line-opacity': 0.8 } })
+        try {
+          const wl = new WarpedMapLayer()
+          m.addLayer(wl, 'radius-line')
+          layer.current = wl
+        } catch (e) {
+          console.error('historic overlay failed', e)
+          onProblem(`Historic overlay failed: ${(e as Error).message}`)
+        }
         resolve()
       }),
     )
@@ -71,7 +84,14 @@ export function MapView({ centre, radiusM, annotationUrls, opacity, findings, se
     home.className = 'home-pin'
     home.title = 'Your address'
     new Marker({ element: home }).setLngLat(centre).addTo(m)
-    return () => m.remove()
+    const placed = markers.current
+    return () => {
+      // React StrictMode mounts twice in dev; drop markers that belonged to the removed map
+      for (const mk of placed.values()) mk.remove()
+      placed.clear()
+      layer.current = null
+      m.remove()
+    }
     // the map is created once per place; later prop changes are applied by the effects below
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -90,11 +110,22 @@ export function MapView({ centre, radiusM, annotationUrls, opacity, findings, se
   useEffect(() => {
     let cancelled = false
     void ready.current?.then(async () => {
-      const wl = layer.current!
+      const wl = layer.current
+      if (!wl) return
       wl.clear()
       for (const url of annotationUrls) {
         if (cancelled) return
-        await wl.addGeoreferenceAnnotationByUrl(url).catch((e) => console.warn('overlay failed', url, e))
+        try {
+          const results = await wl.addGeoreferenceAnnotationByUrl(url, undefined, { failureMode: 'best-effort' })
+          const failed = results.filter((r) => !r.ok)
+          if (failed.length) {
+            console.error('overlay sheets failed', url, failed)
+            onProblem(`${failed.length} of ${results.length} historic sheets failed to load: ${failed[0]!.ok ? '' : failed[0]!.error.message}`)
+          }
+        } catch (e) {
+          console.error('overlay failed', url, e)
+          onProblem(`Historic overlay failed to load: ${(e as Error).message}`)
+        }
       }
     })
     return () => {
