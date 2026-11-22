@@ -52,8 +52,12 @@ The index never stores images. Images always come from `tile.loc.gov` at request
 
 ## Coordinate math (`src/geo/`)
 
-- **Pixel to lon/lat:** use the transform each annotation declares. The spike annotations used `polynomial` order 1 (affine) with 2–4 control points. Two points give a similarity transform. The code must not assume affine for every sheet: implement affine plus Helmert, and fail loudly on any other type.
-- **Lon/lat to pixel:** the inverse, used to cut the search radius out of a sheet.
+- **Pixel ↔ lon/lat:** use Allmaps' own `ProjectedGcpTransformer` (`@allmaps/project`) with `@allmaps/annotation`'s `parseAnnotation`, and do not write our own transform math. This was decided in task 2. The reasons:
+  - Pins must land exactly where the warped overlay is drawn, and the overlay uses this transformer.
+  - It fits transforms in Web Mercator, not raw degrees. A similarity fit in degrees would stretch east–west, because a degree of longitude is shorter than a degree of latitude.
+  - It handles the image y-axis pointing down.
+  - mapsnap v2.0 emits only `polynomial` order 1 (4–5 control points) and `helmert` (2 control points). The Fort Payne 1927 volume has 7 of the first and 5 of the second. `parseSheets` refuses any other type with `UnsupportedTransformError`.
+- **Lon/lat to pixel** is used to cut the search radius out of a sheet. The circle is mapped into pixels and clipped against the sheet's mask (Sutherland–Hodgman). Both supported transforms are affine, so the circle stays convex.
 - **Distance:** haversine, in metres.
 - Property-based test invariants are listed in Testing strategy.
 
@@ -159,7 +163,11 @@ This is fixed text per class, reviewed by the owner, never generated:
 ## Testing strategy
 
 **Property-based tests (fast-check):**
-- Pixel → lon/lat → pixel round-trips to within 0.5 px for random points inside the sheet.
+- Pixel → lon/lat → pixel round-trips:
+  - within 0.5 px on the real Fort Payne sheets,
+  - within 5 cm on the ground on random synthetic sheets.
+
+  The synthetic bound is in metres because, on very fine sheets (0.02 m/px), floating-point error in the Mercator solve reaches about 1 px (2 cm). That is still about 100 times smaller than mapsnap's typical 3 m placement error.
 - Haversine is symmetric, never negative, and zero only for identical points.
 - The tile planner's tiles cover every pixel of the clipped radius, tiles overlap by 100 px or more, and no tile extends past the image bounds.
 - The banned-phrase filter passes any string built from `hazards.json` content.

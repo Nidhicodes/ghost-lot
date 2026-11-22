@@ -21,9 +21,9 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
   - [x] 1.3 Add the steering files. Done 2026-11-22. Always included: `product.md`, `tech.md` and `structure.md`. Included on matching files: `safety-language.md` (UI, content, prompts and docs) and `vision-prompts.md` (prompts and eval). _Req 6_
   - [ ] 1.4 Move `eval/` into the repo layout and make `vision_eval.py` read prompts from `src/server/prompts/`. Add a `make eval` target. _Req 3_
 - [ ] 2. Geometry module `src/geo/`
-  - [ ] 2.1 Parse the IIIF Georeference Annotation and implement the affine and Helmert transforms with their inverses. Throw on any other transform type. _Req 2.1, 4.1_
-  - [ ] 2.2 Implement haversine and the radius-to-pixel clipping against the SVG selector polygon. _Req 1.3_
-  - [ ] 2.3 Write property-based tests (fast-check) for the round-trip, haversine and clipping invariants. _Req 4.1_
+  - [x] 2.1 Parse the annotation and wrap Allmaps' `ProjectedGcpTransformer`. Refuse any transform other than polynomial order 1 or Helmert. Code: `src/geo/annotation.ts` and `transform.ts`. _Req 2.1, 4.1_
+  - [x] 2.2 Implement haversine, destination point, circle polygon and convex clipping, plus `radiusOnSheet`. Code: `src/geo/distance.ts`, `polygon.ts` and `radius.ts`. _Req 1.3_
+  - [x] 2.3 Write 19 tests in `annotation.test.ts` and `geo.prop.test.ts`, covering round-trips on real and random sheets, haversine, clipping and radius. They passed on 3 consecutive runs. _Req 4.1_
 
 ## Day 3–4 (Nov 24–25): data
 

@@ -16,13 +16,16 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
+    "@allmaps/annotation": "1.0.0-beta.38",
     "@allmaps/maplibre": "1.0.0-beta.44",
+    "@allmaps/project": "1.0.0-beta.10",
     "maplibre-gl": "6.19.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "zod": "4.6.7"
   },
   "devDependencies": {
+    "@allmaps/types": "1.0.0-beta.24",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "@vercel/node": "32.0.0",
