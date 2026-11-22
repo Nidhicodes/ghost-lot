@@ -183,11 +183,17 @@ export function MapView({ centre, radiusM, annotationUrls, opacity, findings, se
     for (const [id, mk] of markers.current) if (!seen.has(id)) (mk.remove(), markers.current.delete(id))
     for (const f of findings) {
       if (markers.current.has(f.id)) continue
+      // MapLibre positions a marker by setting `transform` on its root element, so the
+      // floating animation must live on an inner element or it overrides the position
       const pin = document.createElement('button')
-      pin.className = `ghost-pin ghost-${f.class.toLowerCase()}`
+      pin.className = `ghost-pin-anchor ghost-${f.class.toLowerCase()}`
       pin.type = 'button'
       pin.setAttribute('aria-label', `${hazards.classes[f.class].label}, ${f.year}, about ${f.distanceM} m away`)
-      pin.textContent = hazards.classes[f.class].short[0]!
+      const glyph = document.createElement('span')
+      glyph.className = 'ghost-pin'
+      glyph.setAttribute('aria-hidden', 'true')
+      glyph.textContent = hazards.classes[f.class].short[0]!
+      pin.append(glyph)
       const popup = new Popup({ offset: 18, maxWidth: '320px' }).setDOMContent(popupContent(f))
       popup.on('open', () => onSelect(f.id))
       popup.on('close', () => onSelect(null))
