@@ -74,7 +74,8 @@ describe('store selection', () => {
     expect(upstashConfigFromEnv({})).toBeNull()
   })
 
-  it('refuses to run on Vercel without a shared store', () => {
+  it('refuses to run on Vercel, or when required (Render), without a shared store', () => {
     expect(() => sharedStore({ VERCEL: '1' })).toThrow(/No shared store/)
+    expect(() => sharedStore({ REQUIRE_SHARED_STORE: '1' })).toThrow(/No shared store/)
   })
 })

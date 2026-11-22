@@ -153,7 +153,17 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
       - sheets returned 200 (Pittsburgh: 3 years, 9 sheets);
       - read streamed `plan` then `paused` with the budget set to 0;
       - read with `VERCEL=1` and no KV returned 502 (fails closed).
-    - **Still needed from Nidhi:** an Upstash database, rotated keys, a Vercel login, the project env vars, and `vercel deploy --prebuilt`.
+    - **Change on 2026-11-22: Vercel blocked Nidhi's team** ("exceeded fair use limits"), so the deploy moved to **Render** (`render.yaml`).
+      - The site is a free static site that never sleeps.
+      - The API is a free web service. It sleeps after 15 minutes idle, and its cold start is 30–60 s.
+      - `src/server/nodeServer.ts` reuses the same handlers, with CORS restricted to `ALLOWED_ORIGINS`. It binds to loopback unless `HOST` is set.
+      - `build-index` now streams the zip with yauzl, so no system `unzip` is needed. Its output is byte-identical to before. It peaks at about 440 MB RSS, so the heap is capped at 300 MB.
+      - `fetch-data` downloads the inputs.
+      - `REQUIRE_SHARED_STORE=1` makes the API fail closed without Upstash.
+      - Smoke-tested the bundled server on loopback: health, geocode with CORS, sheets, and read (`plan` then `paused` with the budget at 0).
+    - The Upstash database was created by Nidhi.
+    - Kept as an alternative: the Vercel prebuilt path.
+    - Known limit: the per-IP cap trusts the first `X-Forwarded-For` entry. If Render passes a client-supplied value through, the per-IP cap can be bypassed. The global daily budget still caps cost. Check this after deploy.
 
     Original task: Deploy to Vercel. Before the repo goes public, rotate the Groq key and set it as a server environment variable. _Req 8.1_
 

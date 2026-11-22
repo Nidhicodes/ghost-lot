@@ -3,10 +3,10 @@
  * Input:  data/raw/items.tsv and data/raw/mapsnap-v2.0-loc.zip (see README).
  * Output: index/<ST>.json.gz, index/places.json, index/states.json, index/report.json
  */
-import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join } from 'node:path'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { basename, join } from 'node:path'
 import { gzipSync } from 'node:zlib'
+import yauzl from 'yauzl'
 import { parseSheets, UnsupportedTransformError } from '../../src/geo/annotation'
 import {
   buildPlaces,
@@ -19,8 +19,40 @@ import {
 
 const RAW = 'data/raw'
 const ZIP = join(RAW, 'mapsnap-v2.0-loc.zip')
-const UNZIPPED = join(RAW, 'loc')
 const OUT = 'index'
+
+/**
+ * Stream every `*.main.iiif.json` entry out of the zip, one at a time, without extracting to
+ * disk or needing a system `unzip` (the bundle is ~600 MB uncompressed; hosts have 512 MB RAM).
+ */
+async function forEachMainFile(onFile: (item: string, json: string) => void): Promise<void> {
+  const zip = await new Promise<yauzl.ZipFile>((resolve, reject) =>
+    yauzl.open(ZIP, { lazyEntries: true }, (err, z) => (err || !z ? reject(err) : resolve(z))),
+  )
+  await new Promise<void>((resolve, reject) => {
+    zip.on('error', reject)
+    zip.on('end', () => resolve())
+    zip.on('entry', (entry: yauzl.Entry) => {
+      const name = basename(entry.fileName)
+      if (!name.endsWith('.main.iiif.json')) return zip.readEntry()
+      zip.openReadStream(entry, (err, stream) => {
+        if (err || !stream) return reject(err)
+        const chunks: Buffer[] = []
+        stream.on('data', (c: Buffer) => chunks.push(c))
+        stream.on('error', reject)
+        stream.on('end', () => {
+          try {
+            onFile(name.replace('.main.iiif.json', ''), Buffer.concat(chunks).toString('utf8'))
+          } catch (e) {
+            return reject(e)
+          }
+          zip.readEntry()
+        })
+      })
+    })
+    zip.readEntry()
+  })
+}
 
 interface Volume {
   item: string
@@ -48,44 +80,29 @@ function readVolumes(): Map<string, Volume> {
   return volumes
 }
 
-function findMainFiles(dir: string, out = new Map<string, string>()): Map<string, string> {
-  for (const e of readdirSync(dir, { withFileTypes: true })) {
-    const p = join(dir, e.name)
-    if (e.isDirectory()) findMainFiles(p, out)
-    else if (e.name.endsWith('.main.iiif.json')) out.set(e.name.replace('.main.iiif.json', ''), p)
-  }
-  return out
-}
-
-function main() {
-  if (!existsSync(ZIP)) throw new Error(`Missing ${ZIP}. Download it first (see README).`)
-  if (!existsSync(UNZIPPED)) {
-    mkdirSync(UNZIPPED, { recursive: true })
-    execFileSync('unzip', ['-q', ZIP, '-d', UNZIPPED], { stdio: 'inherit' })
-  }
+async function main() {
+  if (!existsSync(ZIP)) throw new Error(`Missing ${ZIP}. Run \`npm run fetch-data\` first.`)
 
   const volumes = readVolumes()
-  const files = findMainFiles(UNZIPPED)
+  const seen = new Set<string>()
   const byState = new Map<string, SheetRef[]>()
   const forPlaces: (SheetRef & { city: string; state: string })[] = []
   const report = { volumesEligible: volumes.size, volumesMissingFile: 0, volumesRead: 0, sheets: 0, sheetErrors: 0, unsupportedTransforms: 0, errors: [] as string[] }
   const started = Date.now()
 
-  for (const vol of volumes.values()) {
-    const file = files.get(vol.item)
-    if (!file) {
-      report.volumesMissingFile++
-      continue
-    }
+  await forEachMainFile((item, text) => {
+    const vol = volumes.get(item)
+    if (!vol) return
+    seen.add(item)
     let sheets
     try {
-      sheets = parseSheets(JSON.parse(readFileSync(file, 'utf8')))
+      sheets = parseSheets(JSON.parse(text))
     } catch (e) {
       // one bad sheet fails the whole page parse; retry sheet by sheet so the rest survive
       sheets = null
       if (e instanceof UnsupportedTransformError) report.unsupportedTransforms++
     }
-    const page = sheets ? null : (JSON.parse(readFileSync(file, 'utf8')) as { items: unknown[] })
+    const page = sheets ? null : (JSON.parse(text) as { items: unknown[] })
     const items = sheets ? sheets.map((s, idx) => ({ s, idx })) : page!.items.map((raw, idx) => ({ raw, idx }))
     report.volumesRead++
 
@@ -109,7 +126,8 @@ function main() {
     if (report.volumesRead % 2000 === 0) {
       console.log(`${report.volumesRead}/${volumes.size} volumes, ${report.sheets} sheets, ${((Date.now() - started) / 1000).toFixed(0)} s`)
     }
-  }
+  })
+  report.volumesMissingFile = volumes.size - seen.size
 
   mkdirSync(OUT, { recursive: true })
   const states: Record<string, { sheets: number; bbox: LonLatBbox; bytes: number }> = {}
@@ -131,4 +149,7 @@ function main() {
   console.log(JSON.stringify({ ...summary, states: byState.size, seconds: (Date.now() - started) / 1000 }))
 }
 
-main()
+main().catch((e) => {
+  console.error(e)
+  process.exit(1)
+})

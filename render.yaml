@@ -1,0 +1,63 @@
+# Render Blueprint: New → Blueprint in the Render dashboard, pick this repo.
+# Secrets (sync: false) are entered in the dashboard and never stored here.
+services:
+  # The API: a small Node server. Free instances sleep after 15 min idle.
+  - type: web
+    name: ghost-lot-api
+    runtime: node
+    plan: free
+    region: virginia
+    # the index build peaks at ~440 MB RSS locally; capping the heap keeps it under the free 512 MB
+    buildCommand: npm ci --include=dev && npm run fetch-data && NODE_OPTIONS=--max-old-space-size=300 npm run build-index && npm run build:server
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # Render routes public traffic to the port; the server binds all interfaces only because this asks it to
+      - key: HOST
+        value: 0.0.0.0
+      - key: REQUIRE_SHARED_STORE
+        value: "1"
+      - key: MODEL_BASE_URL
+        value: https://generativelanguage.googleapis.com/v1beta/openai
+      - key: MODEL_ID
+        value: gemini-3.5-flash-lite
+      - key: PROMPT_VERSION
+        value: "2"
+      - key: READ_BUDGET_PER_DAY
+        value: "70"
+      - key: LIVE_LOOKUPS_PER_IP_PER_DAY
+        value: "2"
+      - key: MODEL_API_KEY
+        sync: false
+      - key: KV_REST_API_URL
+        sync: false
+      - key: KV_REST_API_TOKEN
+        sync: false
+      # the static site's URL, e.g. https://ghost-lot.onrender.com (no trailing slash)
+      - key: ALLOWED_ORIGINS
+        sync: false
+
+  # The site: static files on Render's CDN; never sleeps.
+  - type: web
+    name: ghost-lot
+    runtime: static
+    buildCommand: npm ci --include=dev && npm run build
+    staticPublishPath: dist
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      # the API service's URL, e.g. https://ghost-lot-api.onrender.com (no trailing slash)
+      - key: VITE_API_BASE
+        sync: false

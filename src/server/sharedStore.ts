@@ -11,7 +11,8 @@ export function sharedStore(env: Record<string, string | undefined> = process.en
   if (store) return store
   const cfg = upstashConfigFromEnv(env)
   if (cfg) store = new UpstashStore(cfg)
-  else if (env.VERCEL) throw new Error('No shared store configured: set KV_REST_API_URL and KV_REST_API_TOKEN (Upstash)')
+  // a restarted or scaled-out host would reset an in-memory budget, so production refuses it
+  else if (env.VERCEL || env.REQUIRE_SHARED_STORE === '1') throw new Error('No shared store configured: set KV_REST_API_URL and KV_REST_API_TOKEN (Upstash)')
   else store = new MemoryStore()
   return store
 }

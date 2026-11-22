@@ -2,6 +2,9 @@ import type { Finding } from '../server/findings'
 import type { LookupResult } from '../server/lookup'
 import type { ReadEvent } from '../server/readSession'
 
+/** Empty in dev (same origin); the Render API URL in production, set at build time. */
+const API = (import.meta.env.VITE_API_BASE ?? '').replace(/\/+$/, '')
+
 export interface Geocoded {
   lon: number
   lat: number
@@ -15,10 +18,10 @@ async function getJson<T>(url: string): Promise<T> {
   return body as T
 }
 
-export const geocode = (q: string) => getJson<Geocoded>(`/api/geocode?${new URLSearchParams({ q })}`)
+export const geocode = (q: string) => getJson<Geocoded>(`${API}/api/geocode?${new URLSearchParams({ q })}`)
 
 export const findSheets = (lat: number, lon: number, r: number) =>
-  getJson<LookupResult>(`/api/sheets?${new URLSearchParams({ lat: String(lat), lon: String(lon), r: String(r) })}`)
+  getJson<LookupResult>(`${API}/api/sheets?${new URLSearchParams({ lat: String(lat), lon: String(lon), r: String(r) })}`)
 
 export interface ReadHandlers {
   onEvent(ev: ReadEvent): void
@@ -33,7 +36,7 @@ export function streamReading(lat: number, lon: number, r: number, year: number,
   let closed = false
   let source: EventSource | undefined
   const open = () => {
-    source = new EventSource(`/api/read?${new URLSearchParams({ lat: String(lat), lon: String(lon), r: String(r), year: String(year) })}`)
+    source = new EventSource(`${API}/api/read?${new URLSearchParams({ lat: String(lat), lon: String(lon), r: String(r), year: String(year) })}`)
     for (const type of ['plan', 'tile', 'paused', 'more', 'done', 'error']) {
       source.addEventListener(type, (e) => {
         const ev = JSON.parse((e as MessageEvent).data) as ReadEvent | { type: 'error'; error: string }
