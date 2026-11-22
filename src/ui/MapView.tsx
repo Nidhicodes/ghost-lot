@@ -1,0 +1,139 @@
+import { useEffect, useRef } from 'react'
+import { AttributionControl, Map as MapLibreMap, Marker, NavigationControl, Popup, type GeoJSONSource } from 'maplibre-gl'
+import 'maplibre-gl/dist/maplibre-gl.css'
+import { WarpedMapLayer } from '@allmaps/maplibre'
+import { circlePolygon } from '../geo/distance'
+import type { Finding } from '../server/findings'
+import hazards from '../content/hazards.json'
+
+const BASEMAP = 'https://tiles.openfreemap.org/styles/dark'
+const ATTRIBUTION =
+  'Historic sheets: <a href="https://www.loc.gov/collections/sanborn-maps/">Library of Congress, Sanborn Maps Collection</a> · Placement: <a href="https://mapsnap.org/">mapsnap</a> · © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+
+interface Props {
+  centre: [number, number]
+  radiusM: number
+  annotationUrls: string[]
+  opacity: number
+  findings: Finding[]
+  selected: string | null
+  onSelect(id: string | null): void
+}
+
+/** Build the pin popup with text nodes only: model-read text is untrusted and never parsed as HTML. */
+function popupContent(f: Finding): HTMLElement {
+  const root = document.createElement('div')
+  root.className = 'pin-popup'
+  const title = document.createElement('strong')
+  title.textContent = `${hazards.classes[f.class].label} · ${f.year}`
+  const dist = document.createElement('div')
+  dist.className = 'muted'
+  dist.textContent = `About ${f.distanceM} m from the address`
+  const reading = document.createElement('div')
+  reading.className = 'reading'
+  const label = document.createElement('span')
+  label.className = 'ai-label'
+  label.textContent = hazards.aiReadingLabel
+  const quote = document.createElement('q')
+  quote.textContent = f.mapText.replace(/\s+/g, ' ').trim()
+  reading.append(label, quote)
+  const img = document.createElement('img')
+  img.src = f.tileUrl
+  img.alt = `The ${f.year} fire-insurance map tile this reading came from`
+  img.loading = 'lazy'
+  root.append(title, dist, reading, img)
+  return root
+}
+
+export function MapView({ centre, radiusM, annotationUrls, opacity, findings, selected, onSelect }: Props) {
+  const el = useRef<HTMLDivElement>(null)
+  const map = useRef<MapLibreMap | null>(null)
+  const layer = useRef<WarpedMapLayer | null>(null)
+  const markers = useRef(new Map<string, Marker>())
+  const ready = useRef<Promise<void> | null>(null)
+
+  useEffect(() => {
+    const m = new MapLibreMap({ container: el.current!, style: BASEMAP, center: centre, zoom: 17, attributionControl: false })
+    m.addControl(new NavigationControl({ showCompass: false }), 'top-right')
+    m.addControl(new AttributionControl({ compact: false, customAttribution: ATTRIBUTION }), 'bottom-right')
+    map.current = m
+    ready.current = new Promise((resolve) =>
+      m.on('load', () => {
+        const wl = new WarpedMapLayer()
+        m.addLayer(wl)
+        layer.current = wl
+        m.addSource('radius', { type: 'geojson', data: { type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [[]] } } })
+        m.addLayer({ id: 'radius-line', type: 'line', source: 'radius', paint: { 'line-color': '#c9f2ff', 'line-width': 2, 'line-dasharray': [2, 2], 'line-opacity': 0.8 } })
+        resolve()
+      }),
+    )
+    const home = document.createElement('div')
+    home.className = 'home-pin'
+    home.title = 'Your address'
+    new Marker({ element: home }).setLngLat(centre).addTo(m)
+    return () => m.remove()
+    // the map is created once per place; later prop changes are applied by the effects below
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    void ready.current?.then(() => {
+      const ring = circlePolygon(centre, radiusM)
+      map.current!.getSource<GeoJSONSource>('radius')?.setData({
+        type: 'Feature',
+        properties: {},
+        geometry: { type: 'Polygon', coordinates: [[...ring, ring[0]!]] },
+      })
+    })
+  }, [centre, radiusM])
+
+  useEffect(() => {
+    let cancelled = false
+    void ready.current?.then(async () => {
+      const wl = layer.current!
+      wl.clear()
+      for (const url of annotationUrls) {
+        if (cancelled) return
+        await wl.addGeoreferenceAnnotationByUrl(url).catch((e) => console.warn('overlay failed', url, e))
+      }
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [annotationUrls])
+
+  useEffect(() => {
+    void ready.current?.then(() => layer.current?.setOpacity(opacity))
+  }, [opacity])
+
+  useEffect(() => {
+    const m = map.current
+    if (!m) return
+    const seen = new Set(findings.map((f) => f.id))
+    for (const [id, mk] of markers.current) if (!seen.has(id)) (mk.remove(), markers.current.delete(id))
+    for (const f of findings) {
+      if (markers.current.has(f.id)) continue
+      const pin = document.createElement('button')
+      pin.className = `ghost-pin ghost-${f.class.toLowerCase()}`
+      pin.type = 'button'
+      pin.setAttribute('aria-label', `${hazards.classes[f.class].label}, ${f.year}, about ${f.distanceM} m away`)
+      pin.textContent = hazards.classes[f.class].short[0]!
+      const popup = new Popup({ offset: 18, maxWidth: '320px' }).setDOMContent(popupContent(f))
+      popup.on('open', () => onSelect(f.id))
+      popup.on('close', () => onSelect(null))
+      markers.current.set(f.id, new Marker({ element: pin }).setLngLat(f.lonLat).setPopup(popup).addTo(m))
+    }
+  }, [findings, onSelect])
+
+  useEffect(() => {
+    for (const [id, mk] of markers.current) {
+      const open = mk.getPopup()?.isOpen()
+      if (id === selected && !open) mk.togglePopup()
+      if (id !== selected && open) mk.togglePopup()
+    }
+    const f = findings.find((x) => x.id === selected)
+    if (f) map.current?.easeTo({ center: f.lonLat, duration: 600 })
+  }, [selected, findings])
+
+  return <div ref={el} className="map" role="region" aria-label="Map of the address with the historic fire-insurance map overlaid" />
+}

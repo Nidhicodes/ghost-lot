@@ -1,0 +1,240 @@
+{
+ "id": "fort-payne-1927",
+ "title": "Downtown Fort Payne, Alabama",
+ "address": "100 Gault Ave N, Fort Payne, AL",
+ "matched": "100 GAULT AVE N, FORT PAYNE, AL, 35967",
+ "lon": -85.72261,
+ "lat": 34.441126,
+ "radiusM": 100,
+ "year": 1927,
+ "years": [
+  1891,
+  1897,
+  1909,
+  1927
+ ],
+ "readOn": "2026-11-22",
+ "model": "gemini-3.5-flash-lite",
+ "promptVersion": 2,
+ "total": 9,
+ "read": 9,
+ "unread": 0,
+ "sheets": [
+  {
+   "item": "sanborn00045_004",
+   "idx": 1,
+   "year": 1927,
+   "annotationUrl": "https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn00045_004.main.iiif.json"
+  },
+  {
+   "item": "sanborn00045_004",
+   "idx": 5,
+   "year": 1927,
+   "annotationUrl": "https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn00045_004.main.iiif.json"
+  },
+  {
+   "item": "sanborn00045_004",
+   "idx": 6,
+   "year": 1927,
+   "annotationUrl": "https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn00045_004.main.iiif.json"
+  },
+  {
+   "item": "sanborn00045_004",
+   "idx": 9,
+   "year": 1927,
+   "annotationUrl": "https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn00045_004.main.iiif.json"
+  }
+ ],
+ "findings": [
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2#0",
+   "class": "AUTO",
+   "mapText": "AUTO REP.",
+   "pass": 1,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011/4600,2300,1852,2500/926,/0/default.jpg",
+   "px": [
+    4908.666666666667,
+    2716.6666666666665
+   ],
+   "lonLat": [
+    -85.72417769520307,
+    34.44093030324935
+   ],
+   "distanceM": 145
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2#1",
+   "class": "FUEL",
+   "mapText": "gasoline tank mark (G.T.)",
+   "pass": 2,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011/4600,2300,1852,2500/926,/0/default.jpg",
+   "px": [
+    5526,
+    2716.6666666666665
+   ],
+   "lonLat": [
+    -85.7237648986004,
+    34.441376438688195
+   ],
+   "distanceM": 110
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2#2",
+   "class": "FUEL",
+   "mapText": "gasoline tank mark (G.T.)",
+   "pass": 2,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011:4600:2300:1852:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0011/4600,2300,1852,2500/926,/0/default.jpg",
+   "px": [
+    5526,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -85.72230441795709,
+    34.44045733119852
+   ],
+   "distanceM": 79
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003:4600:2300:1852:2500:s2#0",
+   "class": "FUEL",
+   "mapText": "G.T.",
+   "pass": 1,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003:4600:2300:1852:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003/4600,2300,1852,2500/926,/0/default.jpg",
+   "px": [
+    4908.666666666667,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -85.7219957602203,
+    34.44034484436577
+   ],
+   "distanceM": 104
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003:4600:2300:1852:2500:s2#1",
+   "class": "AUTO",
+   "mapText": "AUTO REPAIRS",
+   "pass": 1,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003:4600:2300:1852:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003/4600,2300,1852,2500/926,/0/default.jpg",
+   "px": [
+    5526,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -85.72179082248392,
+    34.44057611523126
+   ],
+   "distanceM": 97
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003:4600:0:1852:2500:s2#0",
+   "class": "FUEL",
+   "mapText": "GASOL. FILLING STA.\nG.T.\n10'\nS TILE B.",
+   "pass": 1,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003:4600:0:1852:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003/4600,0,1852,2500/926,/0/default.jpg",
+   "px": [
+    4908.666666666667,
+    2083.3333333333335
+   ],
+   "lonLat": [
+    -85.72304054176593,
+    34.44097454270645
+   ],
+   "distanceM": 43
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004:0:0:2500:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "PRINTING ELEC MOTOR",
+   "pass": 1,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004:0:0:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004/0,0,2500,2500/1250,/0/default.jpg",
+   "px": [
+    416.6666666666667,
+    1250
+   ],
+   "lonLat": [
+    -85.72305162426554,
+    34.44150215327271
+   ],
+   "distanceM": 58
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004:0:2300:2500:2500:s2#0",
+   "class": "INDUSTRIAL",
+   "mapText": "FORMERLY R. SM.",
+   "pass": 1,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004:0:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004/0,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    1250,
+    3550
+   ],
+   "lonLat": [
+    -85.72176899434376,
+    34.44117850308267
+   ],
+   "distanceM": 77
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004:0:2300:2500:2500:s2#1",
+   "class": "INDUSTRIAL",
+   "mapText": "BL. SM.",
+   "pass": 1,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004:0:2300:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0004/0,2300,2500,2500/1250,/0/default.jpg",
+   "px": [
+    2083.3333333333335,
+    4383.333333333334
+   ],
+   "lonLat": [
+    -85.72112977267959,
+    34.44125484761196
+   ],
+   "distanceM": 136
+  },
+  {
+   "id": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003:2300:0:2500:2500:s2#0",
+   "class": "FUEL",
+   "mapText": "G.T",
+   "pass": 1,
+   "year": 1927,
+   "item": "sanborn00045_004",
+   "tileKey": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003:2300:0:2500:2500:s2",
+   "tileUrl": "https://tile.loc.gov/image-services/iiif/service:gmd:gmd397m:g3974m:g3974fm:g3974fm_g000451927:00045_1927-0003/2300,0,2500,2500/1250,/0/default.jpg",
+   "px": [
+    3550,
+    1250
+   ],
+   "lonLat": [
+    -85.7238701258762,
+    34.44069370037299
+   ],
+   "distanceM": 125
+  }
+ ]
+}

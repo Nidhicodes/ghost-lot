@@ -1,0 +1,87 @@
+{
+  "_status": "DRAFT for owner review (task 6.2). Every contaminant line is taken from the cited EPA sources; do not add claims without a source.",
+  "sources": {
+    "epaPastUses": {
+      "title": "Past Property Uses May Result in a Brownfield Site (U.S. EPA, 2024)",
+      "url": "https://www.epa.gov/system/files/documents/2024-05/past_property_uses_may_result_in_a_brownfield_site.pdf"
+    },
+    "epaUst": {
+      "title": "Underground Storage Tanks (U.S. EPA)",
+      "url": "https://www.epa.gov/ust"
+    },
+    "epaBrownfields": {
+      "title": "Brownfields (U.S. EPA)",
+      "url": "https://www.epa.gov/brownfields"
+    }
+  },
+  "classes": {
+    "FUEL": {
+      "label": "Fuel tanks and filling stations",
+      "short": "Fuel",
+      "epaCategory": "Gas Stations and Fuel Storage",
+      "possibleContaminants": [
+        "Gasoline, diesel and heating oil",
+        "Volatile organic compounds (VOCs) and solvents used for cleaning and repair",
+        "Polycyclic aromatic hydrocarbons (PAHs) from asphalt and combustion"
+      ],
+      "questions": [
+        "Ask the seller or the state environmental agency whether any underground storage tanks were registered, removed or closed at or near this address.",
+        "Ask whether a Phase I environmental site assessment has been done for the property.",
+        "Check your state's leaking underground storage tank (LUST) list for nearby addresses."
+      ],
+      "sources": ["epaPastUses", "epaUst"]
+    },
+    "AUTO": {
+      "label": "Garages and auto repair",
+      "short": "Auto",
+      "epaCategory": "Automotive Repair",
+      "possibleContaminants": [
+        "Petroleum from fuels, spills and past fuel storage",
+        "PAHs from combustion, asphalt, ash and fill",
+        "Lead and other metals from paint and radiator solder",
+        "Asbestos from brake repair"
+      ],
+      "questions": [
+        "Ask whether a Phase I environmental site assessment has been done for the property.",
+        "Ask whether the old garage had fuel tanks or floor drains, and whether they were removed."
+      ],
+      "sources": ["epaPastUses"]
+    },
+    "INDUSTRIAL": {
+      "label": "Industry and workshops",
+      "short": "Industry",
+      "epaCategory": "Manufacturers and Power Generation",
+      "possibleContaminants": [
+        "Lead from paint on structures and equipment",
+        "Petroleum and fuel for equipment and heating",
+        "PAHs from power generation, burning, ash and fill",
+        "Other metals, solvents and hazardous substances from manufacturing"
+      ],
+      "questions": [
+        "Ask whether a Phase I environmental site assessment has been done for the property.",
+        "Ask the local planning or environmental office what is on record for the old industrial site."
+      ],
+      "sources": ["epaPastUses"]
+    },
+    "RAIL": {
+      "label": "Railroad lines and yards",
+      "short": "Rail",
+      "epaCategory": "Railroad Facilities",
+      "possibleContaminants": [
+        "Lead from paint on old structures, equipment and railcars",
+        "Other metals from railcar repair and the treatment of wooden ties",
+        "PAHs from coal and diesel combustion, ash and fill",
+        "Pesticides or herbicides used for weed control"
+      ],
+      "questions": [
+        "Ask whether a Phase I environmental site assessment has been done for the property.",
+        "Ask whether fill soil near the old rail line was ever tested before gardening or building."
+      ],
+      "sources": ["epaPastUses"]
+    }
+  },
+  "disclaimer": "These are historical leads from old maps, not findings. Map placement is usually accurate to about 10 feet but is sometimes wrong. Only an environmental assessment or testing can show whether a site is contaminated.",
+  "aiReadingLabel": "AI reading — check the image",
+  "incompleteNotice": "Some map tiles could not be read, so this summary is incomplete.",
+  "pausedNotice": "AI reading is paused for today because the free quota is used up. The historic map still works, and the showcase addresses are fully read."
+}
