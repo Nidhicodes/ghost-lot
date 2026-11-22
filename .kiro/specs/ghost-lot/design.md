@@ -121,7 +121,7 @@ All endpoints:
   - copy tone "what used to haunt this block".
 - **Motion:** the theme must not reduce legibility. It respects `prefers-reduced-motion`.
 
-## Content (`content/hazards.json`)
+## Content (`src/content/hazards.json`)
 
 This is fixed text per class, reviewed by the owner, never generated:
 

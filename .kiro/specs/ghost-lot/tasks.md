@@ -18,7 +18,7 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     - `README` stub.
     - `.kiro/` must stay committed.
     _Req 8.2_
-  - [ ] 1.3 Add the steering files `product.md`, `tech.md` and `safety-language.md`. _Req 6_
+  - [x] 1.3 Add the steering files. Done 2026-11-22. Always included: `product.md`, `tech.md` and `structure.md`. Included on matching files: `safety-language.md` (UI, content, prompts and docs) and `vision-prompts.md` (prompts and eval). _Req 6_
   - [ ] 1.4 Move `eval/` into the repo layout and make `vision_eval.py` read prompts from `src/server/prompts/`. Add a `make eval` target. _Req 3_
 - [ ] 2. Geometry module `src/geo/`
   - [ ] 2.1 Parse the IIIF Georeference Annotation and implement the affine and Helmert transforms with their inverses. Throw on any other transform type. _Req 2.1, 4.1_
@@ -49,7 +49,7 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 - [ ] 6. Map UI
   - [ ] 6.0 First, render `https://data.mapsnap.org/runs/v2.0/iiif/loc/sanborn00045_004.main.iiif.json` with `@allmaps/maplibre` over a MapLibre basemap, on both desktop and a phone. If it fails or runs slowly, switch to the fallback listed in design Open questions 1. _Req 2.1_
   - [ ] 6.1 Build the landing page (address box and showcase chips), the results map, the Allmaps overlay with an opacity slider and year picker, and the attribution line. _Req 1.5, 2_
-  - [ ] 6.2 Write `content/hazards.json` with a cited source for each contaminant claim. Nidhi reviews it. _Req 5.2_
+  - [ ] 6.2 Write `src/content/hazards.json` with a cited source for each contaminant claim. Nidhi reviews it. _Req 5.2_
   - [ ] 6.3 Add ghost pins with a class colour and icon, and a popup with the tile image, the AI-reading label, the year and the distance. _Req 4_
   - [ ] 6.4 Build the risk-card drawer: distance bands, fixed content, the disclaimer and the incomplete-reading banner. _Req 5.1, 5.3, 5.4, 6.2_
   - [ ] 6.5 Implement the banned-phrase lint, used both as a unit test and as a Kiro hook on UI copy. _Req 6.1, 6.3_
