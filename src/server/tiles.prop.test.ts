@@ -70,6 +70,17 @@ describe('planTiles', () => {
     )
   })
 
+  it('never plans a sliver wholly inside a neighbouring tile', () => {
+    fc.assert(
+      fc.property(scenario, fc.constantFrom(COARSE_SCALE, FINE_SCALE), ({ width, height, poly }, scale) => {
+        const tiles = planTiles(BASE, width, height, poly, scale)
+        for (const a of tiles)
+          for (const b of tiles)
+            if (a !== b) expect(a.x >= b.x && a.y >= b.y && a.x + a.w <= b.x + b.w && a.y + a.h <= b.y + b.h).toBe(false)
+      }),
+    )
+  })
+
   it('half resolution needs no more tiles than native resolution', () => {
     fc.assert(
       fc.property(scenario, ({ width, height, poly }) => {

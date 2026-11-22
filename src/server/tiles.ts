@@ -44,9 +44,15 @@ export function planTiles(imageServiceId: string, width: number, height: number,
   }
   minX = Math.max(0, minX); minY = Math.max(0, minY)
   maxX = Math.min(width, maxX); maxY = Math.min(height, maxY)
+  const overlap = TILE_OVERLAP_PX * scale
+  const gx0 = Math.floor(minX / step)
+  const gy0 = Math.floor(minY / step)
   const tiles: Tile[] = []
-  for (let gy = Math.floor(minY / step); gy * step < maxY && gy * step < height; gy++) {
-    for (let gx = Math.floor(minX / step); gx * step < maxX && gx * step < width; gx++) {
+  for (let gy = gy0; gy * step < maxY && gy * step < height; gy++) {
+    // a row starting inside the previous row's overlap is wholly covered by it: skip the sliver
+    if (gy > gy0 && gy * step >= height - overlap) break
+    for (let gx = gx0; gx * step < maxX && gx * step < width; gx++) {
+      if (gx > gx0 && gx * step >= width - overlap) break
       const x = gx * step
       const y = gy * step
       const w = Math.min(size, width - x)
