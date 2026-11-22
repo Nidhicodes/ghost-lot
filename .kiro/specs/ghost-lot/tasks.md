@@ -43,8 +43,22 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     All 28 tests pass. _Req 1.3, 1.4_
   - [ ] 3.4 Decide how `index/` reaches production (it is git-ignored). The options are to run `build-index` in the Vercel build (a 132 MB download per deploy) or to commit the 13 MB. Decide in task 7.5.
 - [ ] 4. Lookup API
-  - [ ] 4.1 Implement `/api/geocode` (US Census), `/api/sheets` and the tile planner, with zod validation, a 400 m radius cap and an IP rate limit. _Req 1, 8.3_
-  - [ ] 4.2 Write property-based tests for tile-planner coverage and overlap. _Req 3.3_
+  - [x] 4.1 `/api/geocode` and `/api/sheets` (done 2026-11-22). The `api/` files are thin wrappers over `src/server/{geocode,lookup,tiles,deps,http,rateLimit}.ts`.
+    - Requests are validated with zod: the radius is 25–400 m and the point must be in the US lat/lon box.
+    - The rate limit is GET-only, 30 requests per minute per IP, and in memory per instance. The KV-backed version comes in 5.2.
+    - Errors never expose internals.
+    - The live end-to-end run used the real Census geocoder and real mapsnap data:
+      - 100 Gault Ave N, Fort Payne: 1891, 1897, 1909 and 1927 maps, 8 sheets, 2.9 s.
+      - 1600 Pennsylvania Ave NW: 1888 and 1903 maps, 5 sheets, 1.2 s.
+    _Req 1, 8.3_
+  - [x] 4.2 Property-based tests for the tile planner, plus lookup, geocoder and rate-limit tests. All 49 tests pass. _Req 3.3_
+  - [ ] 4.3 **Fix before task 5: too many tiles.** At 150 m, the 1927 Fort Payne lookup needs 38 native-resolution tiles, and Fort Payne sheets are about 0.03 m/px. The design had assumed 4–12 tiles. At 2–3 tiles per minute on Groq's free tier, that is 13–19 minutes for one address. Options:
+    - (a) Run pass 1 at 2× downscale. Native-resolution tiles are then only needed for pass 2 on AUTO/FUEL tiles. In the spike, pass 2 found the tanks on a 1300 px crop downscaled from 2400 px (c14).
+    - (b) Read only the default year.
+    - (c) Read the tiles nearest the address first.
+    - (d) Lower the default radius.
+
+    Pick with Nidhi, then re-run the eval at the chosen resolution.
 
 ## Day 5–6 (Nov 26–27): reading
 
