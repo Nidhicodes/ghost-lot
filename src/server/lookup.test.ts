@@ -57,6 +57,14 @@ describe('findSheets', () => {
     expect(r.nearest).toBeNull()
   })
 
+  it('plans the newest year only, nearest tile first', async () => {
+    const r = await findSheets(DOWNTOWN, 150, fakeDeps())
+    const planned = r.readingPlan
+    expect(planned.length).toBe(r.sheets.filter((s) => s.year === r.defaultYear).reduce((n, s) => n + s.tiles.length, 0))
+    expect(planned.every((p) => r.sheets[p.sheet]!.year === r.defaultYear)).toBe(true)
+    for (let i = 1; i < planned.length; i++) expect(planned[i]!.distanceM).toBeGreaterThanOrEqual(planned[i - 1]!.distanceM)
+  })
+
   it('a bigger radius never returns fewer sheets', async () => {
     const small = await findSheets(DOWNTOWN, 50, fakeDeps())
     const big = await findSheets(DOWNTOWN, 400, fakeDeps())

@@ -42,16 +42,18 @@ def ask(path):
         data=json.dumps(body).encode(),
         headers={"Authorization": "Bearer " + os.environ["GROQ_API_KEY"],
                  "Content-Type": "application/json", "User-Agent": "GhostLotSpike/0.1"})
-    for attempt in range(4):
+    for attempt in range(8):
         try:
             d = json.load(urllib.request.urlopen(req, timeout=120))
             return d["choices"][0]["message"]["content"]
         except urllib.error.HTTPError as e:
             msg = e.read().decode()[:400]
             if e.code == 429:
-                time.sleep(15 * (attempt + 1)); continue
+                wait = float(e.headers.get("retry-after") or 0) or 15 * (attempt + 1)
+                print(f"  429, waiting {wait:.0f}s", flush=True)
+                time.sleep(min(wait + 1, 90)); continue
             raise SystemExit(f"HTTP {e.code}: {msg}")
-    raise SystemExit("rate-limited 4 times")
+    raise SystemExit("rate-limited 8 times")
 
 
 def parse(text):

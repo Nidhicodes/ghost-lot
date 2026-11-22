@@ -21,7 +21,7 @@ inclusion: always
 | `data.mapsnap.org/runs/v2.0/` | georeference annotations, `items.tsv` | Data is ODbL and allows any origin (CORS `*`). |
 | `tile.loc.gov` IIIF | sheet images and crops | Allows any origin (CORS `*`) and is often slow, with 20–90 s responses and truncated downloads. Always retry. |
 | `loc.gov` search/JSON API | — | **Never call it.** It returns a Cloudflare 403 to scripts. |
-| Groq `qwen/qwen3.8-27b` | vision passes | The free tier allows 8,000 tokens per minute and 1,000 requests per day, which is about 2–3 tiles per minute. On a 429, back off for 20, 40, then 60 s. |
+| Groq `qwen/qwen3.8-27b` | vision passes | Free tier limits: 8,000 tokens per minute, 1,000 requests per day, and **200,000 tokens per day**. The daily token cap binds first: each tile read is charged about 2,500 tokens, so the free tier allows about 80 tile reads per day. On a 429, honour `retry-after`. When `x-should-retry: false` is set, the daily cap has been hit and retrying in a loop is pointless. |
 
 ## Conventions
 

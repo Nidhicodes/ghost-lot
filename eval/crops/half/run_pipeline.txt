@@ -1,0 +1,9 @@
+  429, waiting 798s
+  429, waiting 708s
+  429, waiting 618s
+  429, waiting 713s
+  429, waiting 530s
+  429, waiting 429s
+  429, waiting 344s
+  429, waiting 300s
+rate-limited 8 times

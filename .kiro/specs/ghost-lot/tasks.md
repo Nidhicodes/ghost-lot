@@ -52,7 +52,13 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
       - 1600 Pennsylvania Ave NW: 1888 and 1903 maps, 5 sheets, 1.2 s.
     _Req 1, 8.3_
   - [x] 4.2 Property-based tests for the tile planner, plus lookup, geocoder and rate-limit tests. All 49 tests pass. _Req 3.3_
-  - [ ] 4.3 **Fix before task 5: too many tiles.** At 150 m, the 1927 Fort Payne lookup needs 38 native-resolution tiles, and Fort Payne sheets are about 0.03 m/px. The design had assumed 4–12 tiles. At 2–3 tiles per minute on Groq's free tier, that is 13–19 minutes for one address. Options:
+  - [~] 4.3 Tile count. Options (a), (b) and (c) were implemented on 2026-11-22:
+    - Pass 1 reads at 2× downscale (2,500 scan px sent as 1,250 px), and `refineTile` produces native-resolution tiles for pass 2.
+    - Only the newest year is read, nearest tile first, through `readingPlan`.
+    - Result for Fort Payne 1927 at 150 m: 38 tiles became 17 (8 at 100 m). For 1600 Pennsylvania Ave (1903): 11 tiles at 150 m and 4 at 100 m.
+
+    **The half-resolution eval is blocked.** The Groq free tier also caps usage at 200,000 tokens per day, and that cap was hit after crops c00 and c01. Run `eval/pipeline_eval.py` once tokens recover; it resumes from `crops/half/pipeline_partial.jsonl`.
+    Original problem statement: **Fix before task 5: too many tiles.** At 150 m, the 1927 Fort Payne lookup needs 38 native-resolution tiles, and Fort Payne sheets are about 0.03 m/px. The design had assumed 4–12 tiles. At 2–3 tiles per minute on Groq's free tier, that is 13–19 minutes for one address. Options:
     - (a) Run pass 1 at 2× downscale. Native-resolution tiles are then only needed for pass 2 on AUTO/FUEL tiles. In the spike, pass 2 found the tanks on a 1300 px crop downscaled from 2400 px (c14).
     - (b) Read only the default year.
     - (c) Read the tiles nearest the address first.
