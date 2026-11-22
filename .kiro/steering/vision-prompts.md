@@ -19,6 +19,21 @@ Model: `qwen/qwen3.8-27b` on Groq. Test set: 20 crops from 1927 maps of Albertvi
 
 Logs: `eval/crops/run_a.txt`, `run_b.txt`, `run_fullres.txt` and `run_tankprobe.txt`.
 
+## Shipped pipeline eval (Nov 22, 2026): Gemini `gemini-3.5-flash-lite`, half resolution
+
+Settings: pass 1 runs at 2× downscale. Pass 2 (tanks) runs where pass 1 flagged AUTO or FUEL. The Gemini endpoint is OpenAI-compatible (`https://generativelanguage.googleapis.com/v1beta/openai`).
+
+- **Pass 1 alone:** 17 of 18 classes, with 1 "false" positive. That positive, RAIL on c13, turned out to be real tracks inside the larger half-res region, so the labels were corrected.
+- **Pass 1 + pass 2:** all 18 labeled classes found.
+  - 0 false alarms on the 11 truly hazard-free crops.
+  - Pass 2 counted 0 tanks on all 12 originally-NONE crops.
+- **Pass 2 ran on 5 crops:** c03, c04, c10, c11 and c14. It recovered the tank on c03 that pass 1 missed.
+- No 429 errors were hit during the 40 calls.
+
+Logs: `eval/crops/half/run_pipeline.gemini-3.5-flash-lite.txt` and `pipeline_results.gemini-3.5-flash-lite.json`.
+
+The Groq run of the same eval is incomplete. Groq's free cap is 200K tokens per day, and only c00 and c01 finished.
+
 ## Rules for changing prompts
 
 1. Prompts live in `src/server/prompts/` as versioned files. Any change bumps `PROMPT_VERSION`.

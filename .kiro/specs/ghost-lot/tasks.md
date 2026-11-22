@@ -57,7 +57,7 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
     - Only the newest year is read, nearest tile first, through `readingPlan`.
     - Result for Fort Payne 1927 at 150 m: 38 tiles became 17 (8 at 100 m). For 1600 Pennsylvania Ave (1903): 11 tiles at 150 m and 4 at 100 m.
 
-    **The half-resolution eval is blocked.** The Groq free tier also caps usage at 200,000 tokens per day, and that cap was hit after crops c00 and c01. Run `eval/pipeline_eval.py` once tokens recover; it resumes from `crops/half/pipeline_partial.jsonl`.
+    The half-resolution eval was run on Gemini (see 5.0): 18 of 18 labeled classes, 0 false alarms. Half resolution is validated. The Groq run is still incomplete because of its 200,000 tokens-per-day cap.
     Original problem statement: **Fix before task 5: too many tiles.** At 150 m, the 1927 Fort Payne lookup needs 38 native-resolution tiles, and Fort Payne sheets are about 0.03 m/px. The design had assumed 4–12 tiles. At 2–3 tiles per minute on Groq's free tier, that is 13–19 minutes for one address. Options:
     - (a) Run pass 1 at 2× downscale. Native-resolution tiles are then only needed for pass 2 on AUTO/FUEL tiles. In the spike, pass 2 found the tanks on a 1300 px crop downscaled from 2400 px (c14).
     - (b) Read only the default year.
@@ -70,7 +70,11 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 
 - [ ] 5. Vision service
   - [ ] 5.1 Implement the pass-1 and pass-2 prompts as versioned files, the parser (strip `<think>` blocks and fences, validate with zod) and the retry-then-`unread` rule. _Req 3.1, 3.2, 3.5_
-  - [ ] 5.0 Choose the vision provider. Get a Gemini key from Nidhi and read the Flash-Lite RPD in her AI Studio. Run `eval/pipeline_eval.py` with Gemini's `MODEL_BASE_URL`/`MODEL_ID`, and finish the Groq run once its daily tokens recover. Pick the provider with the better score within the free quota. The eval scripts are now provider-agnostic. _Req 7a.6_
+  - [x] 5.0 Provider chosen: **Gemini `gemini-3.5-flash-lite`** (2026-11-22). On the half-resolution pipeline eval it found 18 of 18 labeled classes, with 0 false alarms once the c13 label was corrected (see `vision-prompts.md`).
+    - Still open: Nidhi to read the free requests-per-day limit for Flash-Lite in AI Studio, then set `READ_BUDGET_PER_DAY` to match.
+    - Groq stays as the fallback.
+
+    Original task: Choose the vision provider. Get a Gemini key from Nidhi and read the Flash-Lite RPD in her AI Studio. Run `eval/pipeline_eval.py` with Gemini's `MODEL_BASE_URL`/`MODEL_ID`, and finish the Groq run once its daily tokens recover. Pick the provider with the better score within the free quota. The eval scripts are now provider-agnostic. _Req 7a.6_
   - [ ] 5.2 Implement the worker queue with 429 backoff, the tile fetch with 3 retries, and the cache keyed by tile, model and prompt version. _Req 3.6, 7.2_
   - [ ] 5.2a Add the daily read budget and the per-IP live-lookup cap in KV. Handle a daily-quota 429 by marking the day as spent. Return `paused` from `/api/read` while the overlay keeps working. _Req 7a.2–7a.5_
   - [ ] 5.3 Implement `/api/read` as an SSE stream of per-tile progress. _Req 7.2_

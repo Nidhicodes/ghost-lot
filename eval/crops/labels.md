@@ -37,3 +37,9 @@ Hazard classes (environmental history worth flagging):
 - FUEL: c03, c04, c10, c11, c14 (5). AUTO: c03, c04, c11, c14 (4). INDUSTRIAL: c04, c05(edge), c07(edge), c11 (4). RAIL: c04, c10, c11, c14, c15 (5).
 - Hard cases for a model: "A" = private auto shed (NOT a commercial garage); "G.T." / "GTS." = gasoline tank abbreviations; "Railroad" street name vs actual R.R. tracks (c13); hazards cut off at crop edges (c05, c07); "BL.SM." = blacksmith.
 - Labeler: the agent (Claude), from the images. A second human pass on 3-4 crops is advisable before using this as gold.
+
+## Half-resolution regions (`crops/half/`, added 2026-11-22)
+
+These are the same crop centres at 2500 × 2500 scan px, sent as 1250 px. The original crops were 2400 px, so each half region shows a little more map at its edges.
+- **c13 (half): add RAIL.** The A.G.S. R.R. tracks appear along the bottom edge, below Warehouse Lane. The agent checked this against the image. The original 2400 px c13 stays NONE.
+- The other rows are not re-labelled for the extra edge strip. A hazard that sits only in that strip would not be counted, so recall on the half set may be slightly overstated.
