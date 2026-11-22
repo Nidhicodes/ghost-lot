@@ -11,17 +11,7 @@ MODEL = sys.argv[1] if len(sys.argv) > 1 else os.environ.get("MODEL_ID", "qwen/q
 ONLY = sys.argv[2].split(",") if len(sys.argv) > 2 else None
 CLASSES = ["FUEL", "AUTO", "INDUSTRIAL", "RAIL"]
 
-PROMPT = """You are reading a crop of a 1920s Sanborn fire insurance map.
-Find any former land uses that could leave soil or groundwater contamination, in these classes:
-- FUEL: gasoline/oil tanks (abbreviated "G.T." or "GTS."), filling stations, oil company yards, refineries
-- AUTO: commercial or public garages, auto repair, parts departments, vulcanizing (tire repair)
-- INDUSTRIAL: blacksmith ("BL.SM."), foundry, machine shop, gas engine, mill, canning, bottling or other plant
-- RAIL: railroad tracks or rail yards (labelled "R.R."). A street merely NAMED "Railroad" is not tracks.
-Do NOT count: dwellings ("D"), small private auto sheds marked "A" behind houses, stores, offices, churches, hotels, banks.
-Only report text you can actually read on the map. Partly cut-off text at the crop edge counts if the hazard is identifiable.
-Reply with JSON only, no prose:
-{"hazards":[{"class":"FUEL|AUTO|INDUSTRIAL|RAIL","map_text":"exact text you read"}]}
-Use {"hazards":[]} if there are none."""
+PROMPT = json.load(open("../src/server/prompts/prompts.json"))["pass1"]  # run from eval/
 
 
 def gold():

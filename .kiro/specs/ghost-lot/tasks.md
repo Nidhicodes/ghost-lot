@@ -69,7 +69,21 @@ Dates assume work starts Nov 22, 2026 and must be submitted by Dec 4, 2026 at 2:
 ## Day 5–6 (Nov 26–27): reading
 
 - [ ] 5. Vision service
-  - [ ] 5.1 Implement the pass-1 and pass-2 prompts as versioned files, the parser (strip `<think>` blocks and fences, validate with zod) and the retry-then-`unread` rule. _Req 3.1, 3.2, 3.5_
+  - [x] 5.1 Prompts and parsing (done 2026-11-22). _Req 3.1, 3.2, 3.5_
+    - Prompts live in `src/server/prompts/prompts.json` (v2). The app and the Python eval share this file.
+    - v2 adds a 3×3 `where` cell to each finding.
+    - `src/server/vision/parse.ts` parses defensively, and an unparseable reply is retried once, then the tile is marked `unread`.
+    - The v2 eval on Gemini: 19/19 classes and 0 false alarms (`eval/crops/half/run_pipeline.gemini-3.5-flash-lite.p2.txt`).
+    - Design change: pass 2 runs on the same half-resolution tile, not on native-resolution subtiles. The eval shows that works, and it costs 1 call instead of about 4. `refineTile` is kept for later if needed.
+  - [x] 5.2 / 5.2a Reading, cache and budget (done 2026-11-22). _Req 3.6, 7.2, 7a.2–7a.5_
+    - `readTile` handles the cache, the budget reservation and refund, short 429 waits, and a daily-quota 429, which marks the day as spent.
+    - Scan downloads go through `fetchTileImage`: LoC URLs only, 3 retries.
+    - `Budget` keeps a daily cap on the Pacific calendar day, plus a per-IP live cap that is counted once per lookup.
+    - The store is `MemoryStore` for now. **The shared KV adapter is still to do (7.5).** Until then, the budget and cache are per instance.
+  - [x] 5.3 `/api/read` SSE (done 2026-11-22). _Req 7.2_
+    - It recomputes the plan on the server, so clients never send URLs.
+    - It emits `plan`, `tile`… and then one of `done`, `more` or `paused`. `more` is emitted at 45 s so a request fits the function limit, and resuming is served from the cache.
+    - Live run on 100 Gault Ave N, Fort Payne, at 100 m: 9 tiles, 13 model calls, 134 s, 0 unread. The tiles produced 10 readings: garages, G.T. tanks, a filling station, a blacksmith and an electric-motor print shop. These readings are **not yet checked against the images**.
   - [x] 5.0 Provider chosen: **Gemini `gemini-3.5-flash-lite`** (2026-11-22). On the half-resolution pipeline eval it found 18 of 18 labeled classes, with 0 false alarms once the c13 label was corrected (see `vision-prompts.md`).
     - Still open: Nidhi to read the free requests-per-day limit for Flash-Lite in AI Studio, then set `READ_BUDGET_PER_DAY` to match.
     - Groq stays as the fallback.

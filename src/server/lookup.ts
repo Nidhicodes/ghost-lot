@@ -72,6 +72,15 @@ export function planReading(sheets: SheetHit[], point: Point, year: number | nul
 const overlaps = (a: LonLatBbox, b: LonLatBbox) => a[0] <= b[2] && b[0] <= a[2] && a[1] <= b[3] && b[1] <= a[3]
 
 export async function findSheets(point: Point, radiusM: number, deps: LookupDeps): Promise<LookupResult> {
+  return (await findSheetsDetailed(point, radiusM, deps)).result
+}
+
+/** Same as findSheets, plus each sheet's transformer (same order as `result.sheets`) for server-side use. */
+export async function findSheetsDetailed(
+  point: Point,
+  radiusM: number,
+  deps: LookupDeps,
+): Promise<{ result: LookupResult; transformers: SheetTransformer[] }> {
   const { dLat, dLon } = radiusInDegrees(point[1], radiusM)
   const query: LonLatBbox = [point[0] - dLon, point[1] - dLat, point[0] + dLon, point[1] + dLat]
   const candidateStates = Object.entries(deps.states).filter(([, s]) => overlaps(s.bbox, query)).map(([st]) => st)
@@ -113,7 +122,7 @@ export async function findSheets(point: Point, radiusM: number, deps: LookupDeps
   const years = [...new Set(sheets.map((s) => s.year))].sort((a, b) => a - b)
   const defaultYear = years.at(-1) ?? null
   const near = sheets.length === 0 ? nearestPlace(deps.places, point, NEAREST_PLACE_MAX_M) : null
-  return {
+  const result: LookupResult = {
     point,
     radiusM,
     years,
@@ -122,4 +131,5 @@ export async function findSheets(point: Point, radiusM: number, deps: LookupDeps
     readingPlan: planReading(sheets, point, defaultYear, (i, px) => found[i]!.transformer.toLonLat(px)),
     nearest: near && { city: near.city, state: near.state, years: near.years, distanceM: Math.round(near.distanceM) },
   }
+  return { result, transformers: found.map((f) => f.transformer) }
 }

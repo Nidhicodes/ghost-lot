@@ -9,7 +9,7 @@ import json, re, time
 
 ns = {}
 exec(open("vision_eval.py").read().split("\ng = gold()")[0], ns)  # PROMPT, ask, parse, gold, CLASSES
-TANK_PROMPT = re.search(r'PROMPT = """(.*?)"""', open("tank_probe.py").read(), re.S).group(1)
+TANK_PROMPT = json.load(open("../src/server/prompts/prompts.json"))["pass2"]
 
 ask, parse, gold, CLASSES = ns["ask"], ns["parse"], ns["gold"], ns["CLASSES"]
 TRIGGER = re.compile(r"GARAGE|FILLING|OIL", re.I)
@@ -27,8 +27,10 @@ def tank_count(text):
 
 
 g = gold()
+# half-resolution regions are larger than the labelled crops; see "Half-resolution regions" in labels.md
+g["c13"] = {"RAIL"}
 general_prompt = ns["PROMPT"]
-MODEL_TAG = re.sub(r"[^A-Za-z0-9.-]+", "_", ns["MODEL"])
+MODEL_TAG = re.sub(r"[^A-Za-z0-9.-]+", "_", ns["MODEL"]) + ".p" + str(json.load(open("../src/server/prompts/prompts.json"))["version"])
 PARTIAL = f"crops/half/pipeline_partial.{MODEL_TAG}.jsonl"  # one line per finished crop, so a killed run resumes
 rows = {}
 try:
